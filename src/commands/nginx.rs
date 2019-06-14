@@ -1,9 +1,5 @@
-use shiplift::{Docker, ExecContainerOptions, ContainerOptions};
+use shiplift::{Docker, ContainerOptions};
 use tokio::prelude::Future;
-use crate::domain::container;
-use shiplift::tty::StreamType;
-use futures::stream::Stream;
-use shiplift::builder::EventFilterType::Volume;
 
 pub fn execute() {
     //FIX: si el contenedor existe pero esta parado, no lo puede crear y tampoco lo arranca, hay que controlar el error

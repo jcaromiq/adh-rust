@@ -19,6 +19,7 @@ fn main() {
     if let Some(_) = matches.subcommand_matches("ps") {
         commands::ps::execute();
     }
+
     if let Some(_) = matches.subcommand_matches("psa") {
         commands::psa::execute();
     }
