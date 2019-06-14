@@ -45,7 +45,11 @@ pub fn to_domain(containers: Vec<shiplift::rep::Container>) -> Containers {
         let mut ports = "".to_string();
         if !c.ports.is_empty() {
             //FIX: iterate over port
-            ports = format!("0.0.0.0:{}->{}/{}", c.ports[0].public_port.unwrap(), c.ports[0].private_port, c.ports[0].typ);
+            if c.ports[0].public_port.is_some() {
+                ports = format!("0.0.0.0:{}->{}/{}", c.ports[0].public_port.unwrap(), c.ports[0].private_port, c.ports[0].typ);
+            } else {
+                ports = format!("{}/{}", c.ports[0].private_port, c.ports[0].typ);
+            }
         }
         list.push(Container {
             id,
