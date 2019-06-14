@@ -13,6 +13,7 @@ fn main() {
         .about("docker helper")
         .subcommand(SubCommand::with_name("ps").about("Formatted ps for running dockers"))
         .subcommand(SubCommand::with_name("psa").about("Formatted ps for all dockers"))
+        .subcommand(SubCommand::with_name("nginx").about("Execute command in a docker"))
         .get_matches();
 
     if let Some(_) = matches.subcommand_matches("ps") {
@@ -20,5 +21,9 @@ fn main() {
     }
     if let Some(_) = matches.subcommand_matches("psa") {
         commands::psa::execute();
+    }
+
+    if let Some(_) = matches.subcommand_matches("nginx") {
+        commands::nginx::execute();
     }
 }

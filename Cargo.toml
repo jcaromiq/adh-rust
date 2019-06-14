@@ -9,6 +9,7 @@ shiplift =  "0.5"
 tokio = "0.1"
 prettytable-rs = "0.8.0"
 clap = "2.33.0"
+futures = "0.1.27"
 
 [dev-dependencies]
 mockiato = "0.7.0"
