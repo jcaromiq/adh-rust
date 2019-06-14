@@ -7,10 +7,10 @@ mod domain;
 use clap::{App, SubCommand};
 
 fn main() {
-    let matches = App::new("ApiumDockerHelper")
+    let matches = App::new("ADH")
         .version("0.1.0")
         .author("Joaco <me@joaquin-caro.es>")
-        .about("adh")
+        .about("docker helper")
         .subcommand(SubCommand::with_name("ps").about("Formatted ps for running dockers"))
         .subcommand(SubCommand::with_name("psa").about("Formatted ps for all dockers"))
         .get_matches();
