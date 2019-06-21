@@ -1,16 +1,16 @@
 use shiplift::{Docker, ContainerListOptions};
 use tokio::prelude::Future;
 use crate::domain::container;
+use crate::infra::printer;
 
 pub fn execute() {
     let docker = Docker::new();
-    let fut = docker
+    let operation = docker
         .containers()
         .list(&ContainerListOptions::builder().all().build())
-        .map(|containers| {
-            container::to_domain(containers).print();
-        })
-        .map_err(|e| eprintln!("Error: {}", e));
+        .map(|c| container::to_domain(c))
+        .map_err(|e| eprintln!("Error: {}", e))
+        .and_then(|c| Ok(printer::print(c)));
 
-    tokio::run(fut);
+    tokio::run(operation);
 }

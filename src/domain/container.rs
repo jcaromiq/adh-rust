@@ -1,35 +1,13 @@
-use prettytable::{Table, format};
-
 pub struct Containers {
-    list: Vec<Container>
+    pub list: Vec<Container>
 }
 
-struct Container {
-    id: String,
-    name: String,
-    image: String,
-    status: String,
-    ports: String,
-}
-
-impl Containers {
-    pub fn print(&self) {
-        let mut table = Table::new();
-        let format = format::FormatBuilder::new()
-            .borders('|')
-            .separators(&[format::LinePosition::Top],
-                        format::LineSeparator::new('─', ' ', '┌', '┐'))
-            .separators(&[format::LinePosition::Bottom],
-                        format::LineSeparator::new('─', ' ', '└', '┘'))
-            .padding(4, 4)
-            .build();
-        table.set_format(format);
-        table.set_titles(row![bc=> "CONTAINER ID", "NAMES", "IMAGE", "STATUS", "PORTS"]);
-        for c in &self.list {
-            table.add_row(row![c.id, c.name, c.image, c.status, c.ports]);
-        }
-        table.printstd();
-    }
+pub struct Container {
+    pub id: String,
+    pub name: String,
+    pub image: String,
+    pub status: String,
+    pub ports: String,
 }
 
 pub fn to_domain(containers: Vec<shiplift::rep::Container>) -> Containers {
