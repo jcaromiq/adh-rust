@@ -16,7 +16,7 @@ pub fn execute() {
     tokio::run(delete_operation);
 }
 
-fn delete(containers: Vec<Container>) -> std::result::Result<(), Error> {
+fn delete(containers: Vec<Container>) -> std::result::Result<(u8), Error> {
     let docker = Docker::new();
     for container in containers {
         let ff = docker.containers()
@@ -26,5 +26,5 @@ fn delete(containers: Vec<Container>) -> std::result::Result<(), Error> {
             .map_err(|e| eprintln!("Error: {} deleting container", e));
         tokio::spawn(ff);
     }
-    Ok(())
+    Ok((8))
 }
