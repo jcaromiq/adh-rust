@@ -10,6 +10,7 @@ tokio = "0.1.21"
 prettytable-rs = "0.8.0"
 clap = "2.33.0"
 futures = "0.1.27"
+tokio-buf = "0.1.1"
 
 [dev-dependencies]
 mockiato = "0.7.0"

@@ -33,6 +33,9 @@ fn main() {
         .subcommand(SubCommand::with_name("psa")
             .display_order(4)
             .about("Formatted ps for all dockers"))
+        .subcommand(SubCommand::with_name("rc")
+            .display_order(5)
+            .about("Remove all containers"))
         .get_matches();
 
     if let Some(_) = matches.subcommand_matches("ps") {
@@ -46,10 +49,16 @@ fn main() {
     if let Some(_) = matches.subcommand_matches("nginx") {
         commands::nginx::execute();
     }
+
     if let Some(m) = matches.subcommand_matches("start") {
         commands::start::execute(m.value_of("container_id").unwrap());
     }
+
     if let Some(m) = matches.subcommand_matches("stop") {
         commands::stop::execute(m.value_of("container_id").unwrap());
+    }
+
+    if let Some(_) = matches.subcommand_matches("rc") {
+        commands::rc::execute();
     }
 }
