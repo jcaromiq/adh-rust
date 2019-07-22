@@ -11,14 +11,7 @@ pub fn execute() {
         .containers()
         .list(&ContainerListOptions::builder().all().build())
         .and_then(move |containers| {
-            for container in containers {
-                let ff = docker_runtime.containers()
-                    .get(container.id.as_str())
-                    .remove(RmContainerOptions::builder().force(true).build())
-                    .map(move |_| println!("deleted {}", container.id))
-                    .map_err(|e| eprintln!("Error: {} deleting container", e));
-                tokio::spawn(ff);
-            }
+            delete(containers);
             docker_runtime.info()
         })
         .map(|info| eprintln!("{:?}", info))
@@ -26,3 +19,16 @@ pub fn execute() {
 
     tokio::run(f);
 }
+
+fn delete(containers: impl Future<Item=Vec<ContainerRep>, Error=Error>) {
+    for container in containers {
+        let ff = docker_runtime.containers()
+            .get(container.id.as_str())
+            .remove(RmContainerOptions::builder().force(true).build())
+            .map(move |_| println!("deleted {}", container.id))
+            .map_err(|e| eprintln!("Error: {} deleting container", e));
+        tokio::spawn(ff);
+    }
+}
+
+
