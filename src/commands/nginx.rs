@@ -11,8 +11,8 @@ pub fn execute() {
     let fut = docker
         .containers()
         .create(options)
-        .and_then(move |i| {
-            docker.containers().get(&i.id).start()
+        .and_then(move |ngingx| {
+            docker.containers().get(&ngingx.id).start()
         })
         .map(|info| println!("docker nginx created with id {:?}", info))
         .map_err(|e| eprintln!("Error creating docker nginx: {}", e));
