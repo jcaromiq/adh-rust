@@ -10,13 +10,13 @@ pub fn execute() {
         .and_then(move |containers| {
             delete(containers)
         })
-        .map(|info| eprintln!("{:?}", info))
+        .map(|_| eprintln!("All containers deleted"))
         .map_err(|e| eprintln!("Error {}", e));
 
     tokio::run(delete_operation);
 }
 
-fn delete(containers: Vec<Container>) -> std::result::Result<(u8), Error> {
+fn delete(containers: Vec<Container>) -> std::result::Result<(), Error> {
     let docker = Docker::new();
     for container in containers {
         let ff = docker.containers()
@@ -26,5 +26,5 @@ fn delete(containers: Vec<Container>) -> std::result::Result<(u8), Error> {
             .map_err(|e| eprintln!("Error: {} deleting container", e));
         tokio::spawn(ff);
     }
-    Ok((8))
+    Ok(())
 }
