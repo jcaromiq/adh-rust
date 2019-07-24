@@ -5,6 +5,7 @@ use clap::{App, Arg, SubCommand};
 
 use crate::commands::command::Command;
 use crate::commands::ps::Ps;
+use crate::commands::psa::Psa;
 
 mod commands;
 mod domain;
@@ -51,7 +52,8 @@ fn main() {
     }
 
     if let Some(_) = matches.subcommand_matches("psa") {
-        commands::psa::execute();
+        let c: Psa = Command::new();
+        c.execute();
     }
 
     if let Some(_) = matches.subcommand_matches("nginx") {

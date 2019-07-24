@@ -1,9 +1,9 @@
 use shiplift::Docker;
 use tokio::prelude::Future;
 
-use crate::commands::command::Command;
 use crate::domain::container;
 use crate::infra::printer;
+use crate::commands::command::Command;
 
 pub struct Ps {}
 
