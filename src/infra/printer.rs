@@ -1,5 +1,6 @@
+use prettytable::{format, Table};
+
 use crate::domain::container::Containers;
-use prettytable::{Table, format};
 
 pub fn print(containers: Containers) {
     let mut table = Table::new();
