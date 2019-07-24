@@ -3,7 +3,7 @@ extern crate prettytable;
 
 use clap::{App, Arg, SubCommand};
 
-use crate::commands::command::{factory};
+use crate::commands::command::factory;
 
 mod commands;
 mod domain;
@@ -50,10 +50,6 @@ fn main() {
 
     if let Some(m) = matches.subcommand_matches("stop") {
         commands::stop::execute(m.value_of("container_id").unwrap());
-    }
-
-    if let Some(_) = matches.subcommand_matches("rc") {
-        commands::rc::execute();
     }
 
     factory(matches).execute();

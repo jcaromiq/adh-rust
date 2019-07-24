@@ -1,19 +1,25 @@
-use shiplift::{Docker, Error, RmContainerOptions, ContainerListOptions};
-use tokio::prelude::Future;
+use shiplift::{ContainerListOptions, Docker, Error, RmContainerOptions};
 use shiplift::rep::Container;
+use tokio::prelude::Future;
 
-pub fn execute() {
-    let docker = Docker::new();
-    let delete_operation = docker
-        .containers()
-        .list(&ContainerListOptions::builder().all().build())
-        .and_then(move |containers| {
-            delete(containers)
-        })
-        .map(|_| eprintln!("All containers deleted"))
-        .map_err(|e| eprintln!("Error {}", e));
+use crate::commands::command::Command;
 
-    tokio::run(delete_operation);
+pub struct Rc;
+
+impl Command for Rc {
+    fn execute(&self) {
+        let docker = Docker::new();
+        let delete_operation = docker
+            .containers()
+            .list(&ContainerListOptions::builder().all().build())
+            .and_then(move |containers| {
+                delete(containers)
+            })
+            .map(|_| eprintln!("All containers deleted"))
+            .map_err(|e| eprintln!("Error {}", e));
+
+        tokio::run(delete_operation);
+    }
 }
 
 fn delete(containers: Vec<Container>) -> std::result::Result<(), Error> {
