@@ -4,9 +4,9 @@ use tokio::prelude::Future;
 
 use crate::commands::command::Command;
 
-pub struct Rc;
+pub struct RemoveContainers;
 
-impl Command for Rc {
+impl Command for RemoveContainers {
     fn execute(&self) {
         let docker = Docker::new();
         let delete_operation = docker
