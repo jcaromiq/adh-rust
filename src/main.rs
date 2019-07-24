@@ -1,11 +1,15 @@
 #[macro_use]
 extern crate prettytable;
 
+use clap::{App, Arg, SubCommand};
+
+use crate::commands::command::Command;
+use crate::commands::ps::Ps;
+
 mod commands;
 mod domain;
 mod infra;
 
-use clap::{App, SubCommand, Arg};
 
 fn main() {
     let matches = App::new("ADH")
@@ -42,7 +46,8 @@ fn main() {
         .get_matches();
 
     if let Some(_) = matches.subcommand_matches("ps") {
-        commands::ps::execute();
+        let c: Ps = Command::new();
+        c.execute();
     }
 
     if let Some(_) = matches.subcommand_matches("psa") {
