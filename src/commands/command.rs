@@ -9,7 +9,7 @@ pub trait Command {
     fn execute(&self);
 }
 
-pub fn factory(matches: ArgMatches) -> Box<Command> {
+pub fn factory(matches: ArgMatches) -> Box<dyn Command> {
     if let Some(_) = matches.subcommand_matches("ps") {
         return Box::new(Ps);
     }
