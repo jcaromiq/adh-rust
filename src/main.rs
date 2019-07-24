@@ -36,6 +36,9 @@ fn main() {
         .subcommand(SubCommand::with_name("rc")
             .display_order(5)
             .about("Remove all containers"))
+        .subcommand(SubCommand::with_name("remove-none-images")
+            .display_order(6)
+            .about(" Remove none images"))
         .get_matches();
 
     if let Some(_) = matches.subcommand_matches("ps") {
@@ -60,5 +63,9 @@ fn main() {
 
     if let Some(_) = matches.subcommand_matches("rc") {
         commands::rc::execute();
+    }
+
+    if let Some(_) = matches.subcommand_matches("remove-none-images") {
+        commands::remove_none_images::execute();
     }
 }
