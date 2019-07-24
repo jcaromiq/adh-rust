@@ -5,7 +5,7 @@
 # 4. Install with:
 #$ brew tap owner/repo https://github.com/owner/repo.git
 #$ brew install name-of-formula
-class Adh < Formula
+class adh < Formula
   version '0.1.0'
   desc "A port from https://github.com/ApiumhubOpenSource/adh in rust"
   homepage "https://github.com/jcaromiq/adh-rust"
@@ -19,6 +19,6 @@ class Adh < Formula
 
   def install
     # Name of the binary
-    bin.install "Adh"
+    bin.install "adh"
   end
 end
