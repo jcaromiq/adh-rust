@@ -44,13 +44,5 @@ fn main() {
             .about(" Remove none images"))
         .get_matches();
 
-    if let Some(m) = matches.subcommand_matches("start") {
-        commands::start::execute(m.value_of("container_id").unwrap());
-    }
-
-    if let Some(m) = matches.subcommand_matches("stop") {
-        commands::stop::execute(m.value_of("container_id").unwrap());
-    }
-
     factory(matches).execute();
 }
