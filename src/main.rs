@@ -3,7 +3,7 @@ extern crate prettytable;
 
 use clap::{App, Arg, SubCommand};
 
-use crate::commands::command::factory;
+use crate::commands::command::from;
 
 mod commands;
 mod domain;
@@ -44,5 +44,5 @@ fn main() {
             .about("Remove none images"))
         .get_matches();
 
-    factory(matches).execute();
+    from(matches).execute();
 }

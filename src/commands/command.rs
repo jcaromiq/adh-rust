@@ -18,36 +18,25 @@ impl Command for Noop {
     fn execute(&self) { eprintln!("invalid command, try --help") }
 }
 
-pub fn factory(matches: ArgMatches) -> Box<dyn Command> {
-    if let Some(_) = matches.subcommand_matches("ps") {
-        return Box::new(Ps);
+pub fn from(matches: ArgMatches) -> Box<dyn Command> {
+    match matches.subcommand_name() {
+        Some("ps") => { Box::new(Ps) }
+        Some("psa") => { Box::new(Psa) }
+        Some("nginx") => { Box::new(Nginx) }
+        Some("remove-none-images") => { Box::new(RemoveNoneImages) }
+        Some("rc") => { Box::new(RemoveContainers) }
+        Some("start") => {
+            let container_id = get_arg(matches, "start", "container_id");
+            Box::new(Start { container_id })
+        }
+        Some("stop") => {
+            let container_id = get_arg(matches, "stop", "container_id");
+            Box::new(Stop { container_id })
+        }
+        _ => { Box::new(Noop) }
     }
+}
 
-    if let Some(_) = matches.subcommand_matches("psa") {
-        return Box::new(Psa);
-    }
-
-    if let Some(_) = matches.subcommand_matches("nginx") {
-        return Box::new(Nginx);
-    }
-
-    if let Some(_) = matches.subcommand_matches("remove-none-images") {
-        return Box::new(RemoveNoneImages);
-    }
-
-    if let Some(_) = matches.subcommand_matches("rc") {
-        return Box::new(RemoveContainers);
-    }
-
-    if let Some(m) = matches.subcommand_matches("start") {
-        let container_id = m.value_of("container_id").unwrap().to_string();
-        return Box::new(Start { container_id });
-    }
-
-    if let Some(m) = matches.subcommand_matches("stop") {
-        let container_id = m.value_of("container_id").unwrap().to_string();
-        return Box::new(Stop { container_id });
-    }
-
-    return Box::new(Noop);
+fn get_arg(matches: ArgMatches, command: &str, argument: &str) -> String {
+    matches.subcommand_matches(command).unwrap().value_of(argument).unwrap().to_string()
 }
