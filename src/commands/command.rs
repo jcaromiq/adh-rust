@@ -12,6 +12,12 @@ pub trait Command {
     fn execute(&self);
 }
 
+pub struct Noop;
+
+impl Command for Noop {
+    fn execute(&self) { eprintln!("invalid command, try --help") }
+}
+
 pub fn factory(matches: ArgMatches) -> Box<dyn Command> {
     if let Some(_) = matches.subcommand_matches("ps") {
         return Box::new(Ps);
@@ -43,5 +49,5 @@ pub fn factory(matches: ArgMatches) -> Box<dyn Command> {
         return Box::new(Stop { container_id });
     }
 
-    return Box::new(Psa);
+    return Box::new(Noop);
 }

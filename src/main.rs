@@ -41,7 +41,7 @@ fn main() {
             .about("Remove all containers"))
         .subcommand(SubCommand::with_name("remove-none-images")
             .display_order(6)
-            .about(" Remove none images"))
+            .about("Remove none images"))
         .get_matches();
 
     factory(matches).execute();
