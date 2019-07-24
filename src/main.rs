@@ -3,9 +3,7 @@ extern crate prettytable;
 
 use clap::{App, Arg, SubCommand};
 
-use crate::commands::command::Command;
-use crate::commands::ps::Ps;
-use crate::commands::psa::Psa;
+use crate::commands::command::{factory};
 
 mod commands;
 mod domain;
@@ -46,20 +44,6 @@ fn main() {
             .about(" Remove none images"))
         .get_matches();
 
-    if let Some(_) = matches.subcommand_matches("ps") {
-        let c: Ps = Command::new();
-        c.execute();
-    }
-
-    if let Some(_) = matches.subcommand_matches("psa") {
-        let c: Psa = Command::new();
-        c.execute();
-    }
-
-    if let Some(_) = matches.subcommand_matches("nginx") {
-        commands::nginx::execute();
-    }
-
     if let Some(m) = matches.subcommand_matches("start") {
         commands::start::execute(m.value_of("container_id").unwrap());
     }
@@ -72,7 +56,5 @@ fn main() {
         commands::rc::execute();
     }
 
-    if let Some(_) = matches.subcommand_matches("remove-none-images") {
-        commands::remove_none_images::execute();
-    }
+    factory(matches).execute();
 }

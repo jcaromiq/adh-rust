@@ -5,15 +5,9 @@ use crate::domain::container;
 use crate::infra::printer;
 use crate::commands::command::Command;
 
-pub struct Ps {}
-
-impl Ps {}
+pub struct Ps;
 
 impl Command for Ps {
-    fn new() -> Self {
-        Ps {}
-    }
-
     fn execute(&self) {
         let docker = Docker::new();
         let operation = docker
