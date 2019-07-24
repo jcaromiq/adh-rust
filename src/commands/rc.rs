@@ -12,9 +12,7 @@ impl Command for Rc {
         let delete_operation = docker
             .containers()
             .list(&ContainerListOptions::builder().all().build())
-            .and_then(move |containers| {
-                delete(containers)
-            })
+            .and_then(move |containers| delete(containers))
             .map(|_| eprintln!("All containers deleted"))
             .map_err(|e| eprintln!("Error {}", e));
 

@@ -1,5 +1,6 @@
-use futures::Future;
-use shiplift::{Docker, ImageFilter, ImageListOptions};
+use shiplift::{Docker, Error, ImageFilter, ImageListOptions};
+use shiplift::rep::Image;
+use tokio::prelude::Future;
 
 use crate::commands::command::Command;
 
@@ -16,21 +17,22 @@ impl Command for RemoveNoneImages {
         let op = docker
             .images()
             .list(&dangling_filter)
-            .and_then(move |images|
-                {
-                    //TODO: move to fun
-                    for image in images {
-                        let ff = docker.images()
-                            .get(image.id.as_str())
-                            .delete()
-                            .map(move |_| println!("deleted {}", image.id))
-                            .map_err(|e| eprintln!("Error: {} deleting container", e));
-                        tokio::spawn(ff);
-                    }
-                    Ok(())
-                })
+            .and_then(move |images| delete(images))
             .map(|_| println!("All none images deleted"))
             .map_err(|e| eprintln!("Error: {}", e));
         tokio::run(op);
     }
+}
+
+fn delete(images: Vec<Image>) -> std::result::Result<(), Error> {
+    let docker = Docker::new();
+    for image in images {
+        let ff = docker.images()
+            .get(image.id.as_str())
+            .delete()
+            .map(move |_| println!("deleted {}", image.id))
+            .map_err(|e| eprintln!("Error: {} deleting container", e));
+        tokio::spawn(ff);
+    }
+    Ok(())
 }
