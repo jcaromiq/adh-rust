@@ -4,6 +4,7 @@
 ##  Description
 
 > This package will help you working with Docker.
+
 > Port in Rust of original ADH from [Apiumhub](https://github.com/ApiumhubOpenSource/adh)
   
     
@@ -11,8 +12,8 @@
 ##  Installation
 
 ```
-brew tap jcaromiq/adh git@github.com:jcaromiq/trap.git
-#$ brew install adh
+brew tap github/jcaromiq git@github.com:jcaromiq/taps.git
+brew install adh
 ```
    
   
