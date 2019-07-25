@@ -12,7 +12,6 @@ Port in Rust of original ADH from [Apiumhub](https://github.com/ApiumhubOpenSour
     ```
     brew tap jcaromiq/adh git@github.com:jcaromiq/trap.git
     #$ brew install adh
-   
     ```
    
   
