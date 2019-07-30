@@ -12,7 +12,7 @@
 ##  Installation
 
 ```
-brew tap github/jcaromiq https://github.com/jcaromiq/taps
+brew tap jcaromiq/taps
 brew install adh
 ```
    
