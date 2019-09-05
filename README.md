@@ -12,7 +12,7 @@
 ##  Installation
 
 ```
-brew tap github/jcaromiq git@github.com:jcaromiq/taps.git
+brew tap jcaromiq/taps
 brew install adh
 ```
    
@@ -24,13 +24,13 @@ $ adh --help
 
   Commands:
 
-    nginx                     			Run nginx with a volume in the current directory 
-    start <container_id>                Start container with given id
-    stop <container_id>               	Stop container witg given id
-    ps                         			Formatted ps for running dockers
-    psa                        			Formatted ps for all dockers
-    rc       			                Remove all containers
-    remove-none-images         			Remove none images
+    nginx                       Run nginx with a volume in the current directory 
+    start <container_id>        Start container with given id
+    stop <container_id>         Stop container with given id
+    ps                          Formatted ps for running dockers
+    psa                         Formatted ps for all dockers
+    rc                          Remove all containers
+    remove-none-images          Remove none images
 
   Options:
 
