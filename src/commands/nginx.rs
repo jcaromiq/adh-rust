@@ -16,10 +16,11 @@ impl Command for Nginx {
         let fut = docker
             .containers()
             .create(options)
-            .and_then(move |ngingx| {
-                docker.containers().get(&ngingx.id).start()
+            .and_then(move |nginx| {
+                docker.containers().get(&nginx.id).start();
+                Ok(nginx)
             })
-            .map(|info| println!("docker nginx created with id {:?}", info))
+            .map(|info| println!("docker nginx created with id {:?}", info.id))
             .map_err(|e| eprintln!("Error creating docker nginx: {}", e));
         tokio::run(fut);
     }
