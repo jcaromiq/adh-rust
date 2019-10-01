@@ -1,8 +1,9 @@
+use std::error::Error;
+
 use shiplift::{ContainerOptions, Docker};
 use tokio::prelude::Future;
 
 use crate::commands::command::Command;
-use std::error::Error;
 
 pub struct Nginx;
 
@@ -18,11 +19,11 @@ impl Command for Nginx {
             .containers()
             .create(options)
             .and_then(move |nginx| {
-                docker.containers().get(&nginx.id).start();
-                Ok(nginx)
+                docker.containers().get(&nginx.id).start()
             })
-            .map(|info| println!("docker nginx created with id {:?}", info.id))
-            .map_err(|e:shiplift::errors::Error| eprintln!("{}", e.description()));
+            //TODO: print container id
+            .map(|_| println!("docker nginx created"))
+            .map_err(|e: shiplift::errors::Error| eprintln!("{}", e.description()));
         tokio::run(fut);
     }
 }
