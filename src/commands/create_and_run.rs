@@ -4,6 +4,8 @@ use shiplift::{ContainerOptions, Docker};
 use tokio::prelude::Future;
 
 pub fn create_and_run(options: &ContainerOptions) {
+    //TODO: container can exists but maybe is stoped, actually can not create and also can not started
+    // need handle this case and start it
     let docker = Docker::new();
     let fut = docker
         .containers()
