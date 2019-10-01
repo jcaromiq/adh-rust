@@ -3,7 +3,7 @@ mod tests {
     use pretty_assertions::assert_eq;
 
     #[test]
-    fn green() {
-        assert_eq!(2 + 2, 4);
+    fn sanity() {
+        assert_eq!(true, true);
     }
 }
