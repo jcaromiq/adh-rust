@@ -42,6 +42,9 @@ fn main() {
         .subcommand(SubCommand::with_name("remove-none-images")
             .display_order(6)
             .about("Remove none images"))
+        .subcommand(SubCommand::with_name("clr")
+            .display_order(7)
+            .about("Create a local registry"))
         .get_matches();
 
     from(matches).execute();
