@@ -31,6 +31,7 @@ $ adh --help
     psa                         Formatted ps for all dockers
     rc                          Remove all containers
     remove-none-images          Remove none images
+    clr                         Create a local registry
 
   Options:
 
