@@ -13,7 +13,7 @@ impl Command for Psa {
         let operation = docker
             .containers()
             .list(&ContainerListOptions::builder().all().build())
-            .map(|c| container::to_domain(c))
+            .map(container::to_domain)
             .map_err(|e| eprintln!("Error: {}", e))
             .and_then(|c| Ok(printer::print(c)));
         tokio::run(operation);

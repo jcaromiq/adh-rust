@@ -17,7 +17,7 @@ impl Command for RemoveNoneImages {
         let op = docker
             .images()
             .list(&dangling_filter)
-            .and_then(move |images| delete(images))
+            .and_then(delete)
             .map(|_| ())
             .map_err(|e| eprintln!("Error: {}", e));
         tokio::run(op);

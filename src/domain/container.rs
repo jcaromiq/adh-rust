@@ -37,5 +37,5 @@ pub fn to_domain(containers: Vec<shiplift::rep::Container>) -> Containers {
             ports,
         })
     }
-    return Containers { list };
+    Containers { list }
 }

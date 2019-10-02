@@ -19,7 +19,7 @@ pub fn create_and_run(options: &ContainerOptions) {
     tokio::run(fut);
 }
 
-fn start(id: &String) {
+fn start(id: &str) {
     let docker = Docker::new();
     let start_operation = docker.containers().get(&id).start()
         .map(|_| ())
