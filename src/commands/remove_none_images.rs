@@ -18,7 +18,7 @@ impl Command for RemoveNoneImages {
             .images()
             .list(&dangling_filter)
             .and_then(move |images| delete(images))
-            .map(|_| println!("All none images deleted"))
+            .map(|_| ())
             .map_err(|e| eprintln!("Error: {}", e));
         tokio::run(op);
     }
