@@ -13,10 +13,9 @@ pub fn print(containers: Containers) {
         .padding(4, 4)
         .build();
     table.set_format(format);
-    table.set_titles(row![bc=> "CONTAINER ID", "NAMES", "IMAGE", "STATUS", "PORTS"]);
+    table.add_row(row![bc=> "CONTAINER ID", "NAMES", "IMAGE", "STATUS", "PORTS"]);
     for c in &containers.list {
         table.add_row(row![c.id, c.name, c.image, c.status, c.ports]);
     }
-    //TODO: not print table if list is empty
     table.printstd();
 }
