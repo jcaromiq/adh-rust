@@ -12,7 +12,7 @@ mod infra;
 
 fn main() {
     let matches = App::new("ADH")
-        .version("0.1.1")
+        .version("0.1.2")
         .author("Joaco <me@joaquin-caro.es>")
         .about("docker helper")
         .subcommand(SubCommand::with_name("nginx")

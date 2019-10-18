@@ -2,7 +2,7 @@
 # It is not intended for manual editing.
 [[package]]
 name = "adh"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [
  "assert_cmd 0.11.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "clap 2.33.0 (registry+https://github.com/rust-lang/crates.io-index)",
