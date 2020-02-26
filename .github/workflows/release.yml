@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    tags:
-
+    tags:        
+      - *             # Push events to v1 tag
 
 jobs:
   release-mac:
