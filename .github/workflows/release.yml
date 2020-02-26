@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:        
-      - *             # Push events to v1 tag
+      - v.*             # Push events to v1 tag
 
 jobs:
   release-mac:
