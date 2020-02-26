@@ -25,4 +25,8 @@ jobs:
       run: cargo test
     - name: Release
       run: cargo build --release
+    - uses: actions/upload-artifact@v1
+      with:
+        name: release
+        path: target/release/adh
 
