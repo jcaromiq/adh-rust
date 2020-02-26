@@ -5,7 +5,7 @@ authors = ["Joaquin Caro <jcaromiq@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-shiplift =  "0.5.0"
+shiplift =  "0.6.0"
 tokio = "0.1.21"
 prettytable-rs = "0.8.0"
 clap = "2.33.0"
@@ -13,7 +13,7 @@ futures = "0.1.27"
 tokio-buf = "0.1.1"
 
 [dev-dependencies]
-mockiato = "0.7.0"
+mockiato = "0.9.5"
 pretty_assertions = "0.6.1"
-predicates = "1.0"
-assert_cmd = "0.11"
+predicates = "1.0.3"
+assert_cmd = "0.12.0"
