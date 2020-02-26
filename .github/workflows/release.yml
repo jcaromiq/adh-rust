@@ -1,0 +1,19 @@
+name: Release
+
+on:
+  push:
+    tags:
+
+
+jobs:
+  release-mac:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Release
+      run: |
+        curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
+        make upload version=${GITHUB_REF##*/} hub_exec=bin/hub
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
