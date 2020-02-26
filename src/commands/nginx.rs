@@ -10,6 +10,6 @@ impl Command for Nginx {
         let options = &ContainerOptions::builder("nginx")
             .name("adh-nginx")
             .expose(80, "tcp", 8888).build();
-        create_and_run(options);
+        create_and_run(options, "nginx:latest");
     }
 }

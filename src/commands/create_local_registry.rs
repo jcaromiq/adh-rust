@@ -10,7 +10,7 @@ impl Command for LocalRegistry {
         let options = &ContainerOptions::builder("registry:2")
             .name("local-registry")
             .expose(5000, "tcp", 5000).build();
-        create_and_run(options);
+        create_and_run(options, "registry:2");
     }
 }
 
