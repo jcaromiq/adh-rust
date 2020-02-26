@@ -2,7 +2,8 @@ name: Release
 
 on:
   push:
-    tags:
+    tags:        
+      - v.*
 
 jobs:
   release-mac:
@@ -12,7 +13,9 @@ jobs:
     - name: Release
       run: |
         curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
-        make upload version=${GITHUB_REF##*/} hub_exec=bin/hub
+        TAG_NAME=${GITHUB_REF##*/}
+        VERSION=${TAG_NAME/v./}
+        make upload version=${VERSION} hub_exec=bin/hub
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
