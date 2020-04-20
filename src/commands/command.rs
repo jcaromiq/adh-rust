@@ -1,6 +1,7 @@
 use clap::ArgMatches;
 
 use crate::commands::create_local_registry::LocalRegistry;
+use crate::commands::mysql::Mysql;
 use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
 use crate::commands::psa::Psa;
@@ -24,14 +25,21 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("ps") => { Box::new(Ps) }
         Some("psa") => { Box::new(Psa) }
         Some("nginx") => { Box::new(Nginx) }
+        Some("mysql") => {
+            let mysql = Mysql {
+                root_password: get_arg(&matches, "mysql", "root_password"),
+                database_name: get_optional_arg(&matches, "mysql", "database_name"),
+            };
+            Box::new(mysql)
+        }
         Some("remove-none-images") => { Box::new(RemoveNoneImages) }
         Some("rc") => { Box::new(RemoveContainers) }
         Some("start") => {
-            let container_id = get_arg(matches, "start", "container_id");
+            let container_id = get_arg(&matches, "start", "container_id");
             Box::new(Start { container_id })
         }
         Some("stop") => {
-            let container_id = get_arg(matches, "stop", "container_id");
+            let container_id = get_arg(&matches, "stop", "container_id");
             Box::new(Stop { container_id })
         }
         Some("clr") => { Box::new(LocalRegistry) }
@@ -39,6 +47,10 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
     }
 }
 
-fn get_arg(matches: ArgMatches, command: &str, argument: &str) -> String {
+fn get_optional_arg(matches: &ArgMatches, command: &str, argument: &str) -> Option<String> {
+    matches.subcommand_matches(command).unwrap().value_of(argument).map(|s| s.to_string())
+}
+
+fn get_arg(matches: &ArgMatches, command: &str, argument: &str) -> String {
     matches.subcommand_matches(command).unwrap().value_of(argument).unwrap().to_string()
 }
