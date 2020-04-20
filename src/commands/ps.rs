@@ -15,7 +15,10 @@ impl Command for Ps {
             .list(&Default::default())
             .map(container::to_domain)
             .map_err(|e| eprintln!("Error: {}", e))
-            .and_then(|c| Ok(printer::print(c)));
+            .and_then(|c| {
+                printer::print(c);
+                Ok(())
+            });
         tokio::run(operation);
     }
 }

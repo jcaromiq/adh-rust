@@ -15,7 +15,10 @@ impl Command for Psa {
             .list(&ContainerListOptions::builder().all().build())
             .map(container::to_domain)
             .map_err(|e| eprintln!("Error: {}", e))
-            .and_then(|c| Ok(printer::print(c)));
+            .and_then(|c| {
+                printer::print(c);
+                Ok(())
+            });
         tokio::run(operation);
     }
 }
