@@ -27,7 +27,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("nginx") => { Box::new(Nginx) }
         Some("mysql") => {
             let mysql = Mysql {
-                root_password: get_arg(&matches, "mysql", "root_password"),
+                root_password: get_optional_arg(&matches, "mysql", "root_password"),
                 database_name: get_optional_arg(&matches, "mysql", "database_name"),
             };
             Box::new(mysql)
