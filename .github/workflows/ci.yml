@@ -19,18 +19,18 @@ jobs:
         name: release-linux
         path: target/release/adh
     - name: Download linux build
-        uses: actions/download-artifact@v1
-        with:
-          name: release-linux
+      uses: actions/download-artifact@v1
+      with:
+        name: release-linux
     - name: Upload Linux Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release-linux/adh
-          asset_name: adh-linux
-          asset_content_type: application/x-executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: release-linux/adh
+        asset_name: adh-linux
+        asset_content_type: application/x-executable
 
   build-mac:
     runs-on: macOS-latest
@@ -45,15 +45,15 @@ jobs:
         name: release-macOS
         path: target/release/adh
     - name: Download macOS build
-        uses: actions/download-artifact@v1
-        with:
-          name: release-macOS
+      uses: actions/download-artifact@v1
+      with:
+        name: release-macOS
     - name: Upload macOS Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release-macOS/adh
-          asset_name: macOS-linux
-          asset_content_type: application/x-executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: release-macOS/adh
+        asset_name: macOS-linux
+        asset_content_type: application/x-executable
