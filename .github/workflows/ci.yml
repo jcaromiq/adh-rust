@@ -15,9 +15,9 @@ jobs:
     - name: Build
       run: cargo build --release
     - uses: actions/upload-artifact@v1
-        with:
-          name: release-linux
-          path: target/release/adh
+      with:
+        name: release-linux
+        path: target/release/adh
 
   build-mac:
     runs-on: macOS-latest
@@ -31,4 +31,3 @@ jobs:
       with:
         name: release-macOS
         path: target/release/adh
-
