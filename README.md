@@ -24,8 +24,8 @@ $ adh --help
 
   Commands:
 
-    mysql                       Run mysql 
     nginx                       Run nginx with a volume in the current directory
+    mysql                       Run mysql
         --database_name         Optional. Allows you to specify the name of a database to be created on image startup
         --root_password         Optional. Specifies the password that will be set for the MySQL root superuser account
                                 If not set, a random password will be created and printed at the end
