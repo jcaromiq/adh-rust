@@ -3,9 +3,9 @@
 
 ##  Description
 
-> This package will help you working with Docker.
+This package will help you working with Docker.
 
-> Port in Rust of original ADH from [Apiumhub](https://github.com/ApiumhubOpenSource/adh)
+Port in Rust of original ADH from [Apiumhub](https://github.com/ApiumhubOpenSource/adh)
   
     
 
@@ -24,7 +24,11 @@ $ adh --help
 
   Commands:
 
-    nginx                       Run nginx with a volume in the current directory 
+    mysql                       Run mysql 
+    nginx                       Run nginx with a volume in the current directory
+        --database_name         Optional. Allows you to specify the name of a database to be created on image startup
+        --root_password         Optional. Specifies the password that will be set for the MySQL root superuser account
+                                If not set, a random password will be created and printed at the end
     start <container_id>        Start container with given id
     stop <container_id>         Stop container with given id
     ps                          Formatted ps for running dockers
