@@ -1,5 +1,3 @@
-use std::error::Error;
-
 use shiplift::{ContainerOptions, Docker, PullOptions};
 use tokio::prelude::{Future, Stream};
 
@@ -23,7 +21,7 @@ pub fn create_and_run(options: &ContainerOptions, image_name: &str) {
             Ok(created.id)
         })
         .map(|id| println!("docker {:?} created", id))
-        .map_err(|e: shiplift::errors::Error| eprintln!("{}", e.description()));
+        .map_err(|e: shiplift::errors::Error| eprintln!("{}", e.to_string()));
     tokio::run(fut);
 }
 
