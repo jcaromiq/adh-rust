@@ -9,8 +9,8 @@ mod commands;
 mod domain;
 mod infra;
 
-
-fn main() {
+#[tokio::main]
+async fn main() {
     let matches = App::new("ADH")
         .version("0.1.3")
         .author("Joaco <me@joaquin-caro.es>")
@@ -59,5 +59,5 @@ fn main() {
             .about("Create a local registry"))
         .get_matches();
 
-    from(matches).execute();
+    from(matches).execute().await;
 }

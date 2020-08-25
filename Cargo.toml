@@ -5,13 +5,19 @@ authors = ["Joaquin Caro <jcaromiq@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-shiplift =  "0.6.0"
-tokio = "0.1.21"
+#shiplift =  "0.6.0"
+shiplift = { git = "https://github.com/softprops/shiplift" }
+tokio = { version = "0.2.6", features = ["macros"] }
+async-trait = "0.1.38"
 prettytable-rs = "0.8.0"
 clap = "2.33.3"
 futures = "0.3.4"
+futures-util = "0.3"
 tokio-buf = "0.1.1"
 rand="0.7.3"
+openssl = "0.10"
+hyper-openssl = "0.8"
+
 
 [dev-dependencies]
 mockiato = "0.9.5"

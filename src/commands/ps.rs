@@ -1,5 +1,7 @@
+use async_trait::async_trait;
+use futures::StreamExt;
+use futures_util::{};
 use shiplift::Docker;
-use tokio::prelude::Future;
 
 use crate::commands::command::Command;
 use crate::domain::container;
@@ -7,18 +9,17 @@ use crate::infra::printer;
 
 pub struct Ps;
 
+#[async_trait]
 impl Command for Ps {
-    fn execute(&self) {
+    async fn execute(&self) {
         let docker = Docker::new();
-        let operation = docker
+        match docker
             .containers()
             .list(&Default::default())
-            .map(container::to_domain)
-            .map_err(|e| eprintln!("Error: {}", e))
-            .and_then(|c| {
-                printer::print(c);
-                Ok(())
-            });
-        tokio::run(operation);
+            .await
+        {
+            Ok(containers) => printer::print(container::to_domain(containers)),
+            Err(e) => eprintln!("Error: {}", e),
+        }
     }
 }

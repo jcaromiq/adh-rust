@@ -1,6 +1,7 @@
 use shiplift::{Docker, Error, ImageFilter, ImageListOptions};
 use shiplift::rep::Image;
 use tokio::prelude::Future;
+use futures::StreamExt;
 
 use crate::commands::command::Command;
 
