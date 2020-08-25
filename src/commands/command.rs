@@ -5,6 +5,7 @@ use clap::ArgMatches;
 // use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
 use async_trait::async_trait;
+use crate::commands::psa::Psa;
 
 // use crate::commands::psa::Psa;
 // use crate::commands::rc::RemoveContainers;
@@ -27,7 +28,7 @@ impl Command for Noop {
 pub fn from(matches: ArgMatches) -> Box<dyn Command> {
     match matches.subcommand_name() {
         Some("ps") => { Box::new(Ps) }
-        // Some("psa") => { Box::new(Psa) }
+        Some("psa") => { Box::new(Psa) }
         // Some("nginx") => { Box::new(Nginx) }
         // Some("mysql") => {
         //     let mysql = Mysql {
