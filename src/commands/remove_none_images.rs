@@ -1,39 +1,40 @@
+use async_trait::async_trait;
+use futures::StreamExt;
 use shiplift::{Docker, Error, ImageFilter, ImageListOptions};
 use shiplift::rep::Image;
-use tokio::prelude::Future;
-use futures::StreamExt;
 
 use crate::commands::command::Command;
 
 pub struct RemoveNoneImages;
 
+#[async_trait]
 impl Command for RemoveNoneImages {
-    fn execute(&self) {
+    async fn execute(&self) {
         let docker = Docker::new();
 
         let dangling_filter = ImageListOptions::builder()
             .filter(vec!(ImageFilter::Dangling))
             .build();
 
-        let op = docker
+        match docker
             .images()
-            .list(&dangling_filter)
-            .and_then(delete)
-            .map(|_| ())
-            .map_err(|e| eprintln!("Error: {}", e));
-        tokio::run(op);
+            .list(&dangling_filter).await
+        {
+            Ok(images) => delete(images).await,
+            Err(e) => eprintln!("Error: {}", e),
+        };
     }
 }
 
-fn delete(images: Vec<Image>) -> std::result::Result<(), Error> {
+async fn delete(images: Vec<Image>) {
     let docker = Docker::new();
     for image in images {
-        let ff = docker.images()
+        match docker.images()
             .get(image.id.as_str())
             .delete()
-            .map(move |_| println!("deleted {}", image.id))
-            .map_err(|e| eprintln!("Error: {} deleting container", e));
-        tokio::spawn(ff);
+            .await {
+            Ok(_) => println!("deleted {}", image.id),
+            Err(e) => eprintln!("Error: {} deleting container", e),
+        };
     }
-    Ok(())
 }

@@ -9,7 +9,7 @@ use crate::commands::psa::Psa;
 
 // use crate::commands::psa::Psa;
 // use crate::commands::rc::RemoveContainers;
-// use crate::commands::remove_none_images::RemoveNoneImages;
+use crate::commands::remove_none_images::RemoveNoneImages;
 // use crate::commands::start::Start;
 // use crate::commands::stop::Stop;
 
@@ -37,7 +37,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
             };
             Box::new(mysql)
         }
-        // Some("remove-none-images") => { Box::new(RemoveNoneImages) }
+        Some("remove-none-images") => { Box::new(RemoveNoneImages) }
         // Some("rc") => { Box::new(RemoveContainers) }
         // Some("start") => {
         //     let container_id = get_arg(&matches, "start", "container_id");
