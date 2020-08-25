@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 use clap::ArgMatches;
 
-// use crate::commands::create_local_registry::LocalRegistry;
+use crate::commands::create_local_registry::LocalRegistry;
 use crate::commands::mysql::Mysql;
 use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
@@ -46,7 +46,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
             let container_id = get_arg(&matches, "stop", "container_id");
             Box::new(Stop { container_id })
         }
-        // Some("clr") => { Box::new(LocalRegistry) }
+        Some("clr") => { Box::new(LocalRegistry) }
         _ => { Box::new(Noop) }
     }
 }

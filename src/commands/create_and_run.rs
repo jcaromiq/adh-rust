@@ -1,5 +1,5 @@
-use shiplift::{ContainerOptions, Docker, PullOptions};
 use futures::StreamExt;
+use shiplift::{ContainerOptions, Docker, PullOptions};
 
 pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     //TODO: container can exists but maybe is stoped, actually can not create and also can not started
@@ -8,7 +8,7 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     let mut stream = docker
         .images()
         .pull(&PullOptions::builder().image(image_name).build());
-    stream.next().await;
+    while let Some(pull_result) = stream.next().await {}
 
 
     let result = docker
