@@ -6,10 +6,14 @@ pub fn print(containers: Containers) {
     let mut table = Table::new();
     let format = format::FormatBuilder::new()
         .borders('|')
-        .separators(&[format::LinePosition::Top],
-                    format::LineSeparator::new('─', ' ', '┌', '┐'))
-        .separators(&[format::LinePosition::Bottom],
-                    format::LineSeparator::new('─', ' ', '└', '┘'))
+        .separators(
+            &[format::LinePosition::Top],
+            format::LineSeparator::new('─', ' ', '┌', '┐'),
+        )
+        .separators(
+            &[format::LinePosition::Bottom],
+            format::LineSeparator::new('─', ' ', '└', '┘'),
+        )
         .padding(4, 4)
         .build();
     table.set_format(format);

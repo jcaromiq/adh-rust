@@ -1,12 +1,11 @@
 use async_trait::async_trait;
-use shiplift::{Docker, ContainerListOptions};
+use shiplift::{ContainerListOptions, Docker};
 
 use crate::commands::command::Command;
 use crate::domain::container;
 use crate::infra::printer;
 
 pub struct Psa;
-
 
 #[async_trait]
 impl Command for Psa {

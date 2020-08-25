@@ -11,7 +11,8 @@ impl Command for Nginx {
     async fn execute(&self) {
         let options = &ContainerOptions::builder("nginx")
             .name("adh-nginx")
-            .expose(80, "tcp", 8888).build();
+            .expose(80, "tcp", 8888)
+            .build();
         create_and_run(options, "nginx:latest").await;
     }
 }

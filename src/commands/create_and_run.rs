@@ -8,13 +8,9 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     let mut stream = docker
         .images()
         .pull(&PullOptions::builder().image(image_name).build());
-    while stream.next().await.is_some(){};
+    while stream.next().await.is_some() {}
 
-
-    let result = docker
-        .containers()
-        .create(options)
-        .await;
+    let result = docker.containers().create(options).await;
     match result {
         Ok(result) => start(&result.id).await,
         Err(e) => eprintln!("Error: {}", e),

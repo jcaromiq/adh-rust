@@ -11,11 +11,7 @@ pub struct Ps;
 impl Command for Ps {
     async fn execute(&self) {
         let docker = Docker::new();
-        match docker
-            .containers()
-            .list(&Default::default())
-            .await
-        {
+        match docker.containers().list(&Default::default()).await {
             Ok(containers) => printer::print(container::to_domain(containers)),
             Err(e) => eprintln!("Error: {}", e),
         }
