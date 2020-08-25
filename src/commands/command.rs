@@ -1,16 +1,15 @@
+use async_trait::async_trait;
 use clap::ArgMatches;
 
 // use crate::commands::create_local_registry::LocalRegistry;
 use crate::commands::mysql::Mysql;
 use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
-use async_trait::async_trait;
 use crate::commands::psa::Psa;
-
-// use crate::commands::psa::Psa;
 use crate::commands::rc::RemoveContainers;
 use crate::commands::remove_none_images::RemoveNoneImages;
-// use crate::commands::start::Start;
+
+use crate::commands::start::Start;
 // use crate::commands::stop::Stop;
 
 #[async_trait]
@@ -39,10 +38,10 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         }
         Some("remove-none-images") => { Box::new(RemoveNoneImages) }
         Some("rc") => { Box::new(RemoveContainers) }
-        // Some("start") => {
-        //     let container_id = get_arg(&matches, "start", "container_id");
-        //     Box::new(Start { container_id })
-        // }
+        Some("start") => {
+            let container_id = get_arg(&matches, "start", "container_id");
+            Box::new(Start { container_id })
+        }
         // Some("stop") => {
         //     let container_id = get_arg(&matches, "stop", "container_id");
         //     Box::new(Stop { container_id })

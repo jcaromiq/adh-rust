@@ -1,19 +1,22 @@
 use shiplift::Docker;
-use tokio::prelude::Future;
+use async_trait::async_trait;
 
 use crate::commands::command::Command;
 
 pub struct Start { pub container_id: String }
 
+#[async_trait]
+
 impl Command for Start {
-    fn execute(&self) {
+    async fn execute(&self) {
         let docker = Docker::new();
-        let operation = docker
+        match docker
             .containers()
             .get(&self.container_id)
             .start()
-            .map(|_| println!("Container started!"))
-            .map_err(|e| eprintln!("Error: {}", e));
-        tokio::run(operation);
+            .await {
+            Ok(_) =>  println!("Container started!"),
+            Err(e) => eprintln!("Error: {}", e),
+        }
     }
 }
