@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use shiplift::{ContainerListOptions, Docker, Error, RmContainerOptions};
+use shiplift::{ContainerListOptions, Docker, RmContainerOptions};
 use shiplift::rep::Container;
 
 use crate::commands::command::Command;

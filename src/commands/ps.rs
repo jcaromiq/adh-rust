@@ -1,6 +1,4 @@
 use async_trait::async_trait;
-use futures::StreamExt;
-use futures_util::{};
 use shiplift::Docker;
 
 use crate::commands::command::Command;

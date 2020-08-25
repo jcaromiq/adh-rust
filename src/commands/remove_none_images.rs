@@ -1,6 +1,5 @@
 use async_trait::async_trait;
-use futures::StreamExt;
-use shiplift::{Docker, Error, ImageFilter, ImageListOptions};
+use shiplift::{Docker, ImageFilter, ImageListOptions};
 use shiplift::rep::Image;
 
 use crate::commands::command::Command;
