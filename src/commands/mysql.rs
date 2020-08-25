@@ -12,8 +12,12 @@ pub struct Mysql {
     pub database_name: Option<String>,
 }
 
+use async_trait::async_trait;
+
+
+#[async_trait]
 impl Command for Mysql {
-    fn execute(&self) {
+    async fn execute(&self) {
         let mut env = Vec::new();
         let password = match &self.root_password {
             None => {
@@ -35,7 +39,7 @@ impl Command for Mysql {
             .env(env.iter().map(|s| &**s).collect())
             .expose(3306, "tcp", 3306).build();
 
-        create_and_run(options, "mysql:latest");
+        create_and_run(options, "mysql:latest").await;
         println!("mysql root password: {}", password);
     }
 }

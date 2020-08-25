@@ -1,7 +1,7 @@
 use clap::ArgMatches;
 
 // use crate::commands::create_local_registry::LocalRegistry;
-// use crate::commands::mysql::Mysql;
+use crate::commands::mysql::Mysql;
 use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
 use async_trait::async_trait;
@@ -30,13 +30,13 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("ps") => { Box::new(Ps) }
         Some("psa") => { Box::new(Psa) }
         Some("nginx") => { Box::new(Nginx) }
-        // Some("mysql") => {
-        //     let mysql = Mysql {
-        //         root_password: get_optional_arg(&matches, "mysql", "root_password"),
-        //         database_name: get_optional_arg(&matches, "mysql", "database_name"),
-        //     };
-        //     Box::new(mysql)
-        // }
+        Some("mysql") => {
+            let mysql = Mysql {
+                root_password: get_optional_arg(&matches, "mysql", "root_password"),
+                database_name: get_optional_arg(&matches, "mysql", "database_name"),
+            };
+            Box::new(mysql)
+        }
         // Some("remove-none-images") => { Box::new(RemoveNoneImages) }
         // Some("rc") => { Box::new(RemoveContainers) }
         // Some("start") => {
