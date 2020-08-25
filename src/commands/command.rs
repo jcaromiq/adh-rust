@@ -2,7 +2,7 @@ use clap::ArgMatches;
 
 // use crate::commands::create_local_registry::LocalRegistry;
 // use crate::commands::mysql::Mysql;
-// use crate::commands::nginx::Nginx;
+use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
 use async_trait::async_trait;
 use crate::commands::psa::Psa;
@@ -29,7 +29,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
     match matches.subcommand_name() {
         Some("ps") => { Box::new(Ps) }
         Some("psa") => { Box::new(Psa) }
-        // Some("nginx") => { Box::new(Nginx) }
+        Some("nginx") => { Box::new(Nginx) }
         // Some("mysql") => {
         //     let mysql = Mysql {
         //         root_password: get_optional_arg(&matches, "mysql", "root_password"),
