@@ -1,33 +1,34 @@
+use async_trait::async_trait;
 use shiplift::{ContainerListOptions, Docker, Error, RmContainerOptions};
 use shiplift::rep::Container;
-use tokio::prelude::Future;
 
 use crate::commands::command::Command;
 
 pub struct RemoveContainers;
 
+#[async_trait]
 impl Command for RemoveContainers {
-    fn execute(&self) {
+    async fn execute(&self) {
         let docker = Docker::new();
-        let delete_operation = docker
+        match docker
             .containers()
             .list(&ContainerListOptions::builder().all().build())
-            .and_then(delete)
-            .map_err(|e| eprintln!("Error {}", e));
-
-        tokio::run(delete_operation);
+            .await {
+            Ok(container) => delete(container).await,
+            Err(e) => eprintln!("Error: {}", e),
+        }
     }
 }
 
-fn delete(containers: Vec<Container>) -> std::result::Result<(), Error> {
+async fn delete(containers: Vec<Container>) {
     let docker = Docker::new();
     for container in containers {
-        let ff = docker.containers()
+        match docker.containers()
             .get(container.id.as_str())
             .remove(RmContainerOptions::builder().force(true).build())
-            .map(move |_| println!("deleted container '{}' with id {}", container.image, container.id))
-            .map_err(|e| eprintln!("Error: {} deleting container", e));
-        tokio::spawn(ff);
+            .await {
+            Ok(_) => println!("deleted container '{}' with id {}", container.image, container.id),
+            Err(e) => eprintln!("Error: {} deleting container", e),
+        };
     }
-    Ok(())
 }
