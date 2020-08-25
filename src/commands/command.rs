@@ -10,7 +10,7 @@ use crate::commands::rc::RemoveContainers;
 use crate::commands::remove_none_images::RemoveNoneImages;
 
 use crate::commands::start::Start;
-// use crate::commands::stop::Stop;
+use crate::commands::stop::Stop;
 
 #[async_trait]
 pub trait Command {
@@ -42,10 +42,10 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
             let container_id = get_arg(&matches, "start", "container_id");
             Box::new(Start { container_id })
         }
-        // Some("stop") => {
-        //     let container_id = get_arg(&matches, "stop", "container_id");
-        //     Box::new(Stop { container_id })
-        // }
+        Some("stop") => {
+            let container_id = get_arg(&matches, "stop", "container_id");
+            Box::new(Stop { container_id })
+        }
         // Some("clr") => { Box::new(LocalRegistry) }
         _ => { Box::new(Noop) }
     }

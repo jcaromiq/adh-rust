@@ -6,7 +6,6 @@ use crate::commands::command::Command;
 pub struct Start { pub container_id: String }
 
 #[async_trait]
-
 impl Command for Start {
     async fn execute(&self) {
         let docker = Docker::new();
