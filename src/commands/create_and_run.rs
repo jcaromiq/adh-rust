@@ -1,9 +1,8 @@
 use futures::StreamExt;
-use shiplift::{ContainerOptions, Docker, PullOptions};
+use shiplift::{ContainerListOptions, ContainerOptions, Docker, PullOptions};
+use shiplift::errors::Error::Fault;
 
 pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
-    //TODO: container can exists but maybe is stoped, actually can not create and also can not started
-    // need handle this case and start it
     let docker = Docker::new();
     let mut stream = docker
         .images()
@@ -13,8 +12,30 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     let result = docker.containers().create(options).await;
     match result {
         Ok(result) => start(&result.id).await,
-        Err(e) => eprintln!("Error: {}", e),
+        Err(e) => match e {
+            Fault { code, message: _ } => if code == 409 {
+                start_existing_container(options.name.as_ref().unwrap()).await
+            },
+            _ => eprintln!("Error")
+        },
     };
+}
+
+async fn start_existing_container(name: &String) {
+    let docker = Docker::new();
+
+    match docker.containers()
+        .list(&ContainerListOptions::builder().all().build())
+        .await
+    {
+        Ok(containers) => {
+            let nginx = containers.iter()
+                .find(|c| c.names.contains(&format!("/{}", name)));
+
+            start(&nginx.unwrap().id).await;
+        }
+        Err(e) => eprintln!("Error: {}", e)
+    }
 }
 
 async fn start(id: &str) {
