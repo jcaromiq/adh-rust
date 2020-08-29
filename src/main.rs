@@ -57,6 +57,9 @@ async fn main() {
         .subcommand(SubCommand::with_name("clr")
             .display_order(7)
             .about("Create a local registry"))
+        .subcommand(SubCommand::with_name("ri")
+            .display_order(8)
+            .about("Remove all images"))
         .get_matches();
 
     from(matches).execute().await;
