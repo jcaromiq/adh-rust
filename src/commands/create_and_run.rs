@@ -21,7 +21,7 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     };
 }
 
-async fn start_existing_container(name: &String) {
+async fn start_existing_container(name: &str) {
     let docker = Docker::new();
 
     match docker.containers()
