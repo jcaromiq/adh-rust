@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 
 use crate::commands::command::Command;
-use crate::infra::repository::{get_all_containers, delete};
+use crate::infra::repository::{delete, get_all_containers};
 
 pub struct RemoveContainers;
 
@@ -12,4 +12,3 @@ impl Command for RemoveContainers {
         delete(containers).await;
     }
 }
-

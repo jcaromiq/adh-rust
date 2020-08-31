@@ -9,11 +9,11 @@ use crate::commands::psa::Psa;
 use crate::commands::rc::RemoveContainers;
 use crate::commands::remove_none_images::RemoveNoneImages;
 
+use crate::commands::kc::KillContainers;
+use crate::commands::remove_exited_containers::RemoveExitedContainers;
+use crate::commands::ri::RemoveImages;
 use crate::commands::start::Start;
 use crate::commands::stop::Stop;
-use crate::commands::ri::RemoveImages;
-use crate::commands::remove_exited_containers::RemoveExitedContainers;
-use crate::commands::kc::KillContainers;
 
 #[async_trait]
 pub trait Command {

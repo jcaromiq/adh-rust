@@ -1,6 +1,6 @@
 use futures::StreamExt;
-use shiplift::{ContainerListOptions, ContainerOptions, Docker, PullOptions};
 use shiplift::errors::Error::Fault;
+use shiplift::{ContainerListOptions, ContainerOptions, Docker, PullOptions};
 
 pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     let docker = Docker::new();
@@ -13,10 +13,12 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
     match result {
         Ok(result) => start(&result.id).await,
         Err(e) => match e {
-            Fault { code, message: _ } => if code == 409 {
-                start_existing_container(options.name.as_ref().unwrap()).await
-            },
-            _ => eprintln!("Error")
+            Fault { code, message: _ } => {
+                if code == 409 {
+                    start_existing_container(options.name.as_ref().unwrap()).await
+                }
+            }
+            _ => eprintln!("Error"),
         },
     };
 }
@@ -24,17 +26,19 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
 async fn start_existing_container(name: &str) {
     let docker = Docker::new();
 
-    match docker.containers()
+    match docker
+        .containers()
         .list(&ContainerListOptions::builder().all().build())
         .await
     {
         Ok(containers) => {
-            let nginx = containers.iter()
+            let nginx = containers
+                .iter()
                 .find(|c| c.names.contains(&format!("/{}", name)));
 
             start(&nginx.unwrap().id).await;
         }
-        Err(e) => eprintln!("Error: {}", e)
+        Err(e) => eprintln!("Error: {}", e),
     }
 }
 

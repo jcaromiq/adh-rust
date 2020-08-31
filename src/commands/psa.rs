@@ -10,6 +10,5 @@ pub struct Psa;
 impl Command for Psa {
     async fn execute(&self) {
         printer::print(get_all_containers().await);
-
     }
 }
