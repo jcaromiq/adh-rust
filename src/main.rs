@@ -60,6 +60,9 @@ async fn main() {
         .subcommand(SubCommand::with_name("ri")
             .display_order(8)
             .about("Remove all images"))
+        .subcommand(SubCommand::with_name("rec")
+                        .display_order(9)
+                        .about("Remove exited containers"))
         .get_matches();
 
     from(matches).execute().await;

@@ -6,6 +6,7 @@ pub mod nginx;
 pub mod ps;
 pub mod psa;
 pub mod rc;
+pub mod remove_exited_containers;
 pub mod remove_none_images;
 pub mod start;
 pub mod stop;
