@@ -1,4 +1,4 @@
-use shiplift::{ContainerListOptions, Docker, ContainerFilter};
+use shiplift::{ContainerListOptions, Docker, ContainerFilter, RmContainerOptions};
 use crate::domain::container;
 use crate::domain::container::Containers;
 
@@ -10,6 +10,25 @@ pub async fn get_exited_containers() -> Containers {
     let mut status = Vec::new();
     status.push(ContainerFilter::Status(String::from("exited")));
     get_containers(ContainerListOptions::builder().filter(status).build()).await
+}
+
+
+pub async fn delete(containers: Containers) {
+    let docker = Docker::new();
+    for container in containers.list {
+        match docker
+            .containers()
+            .get(container.id.as_str())
+            .remove(RmContainerOptions::builder().force(true).build())
+            .await
+        {
+            Ok(_) => println!(
+                "deleted container '{}' with id {}",
+                container.image, container.id
+            ),
+            Err(e) => eprintln!("Error: {} deleting container", e),
+        };
+    }
 }
 
 pub async fn get_running_containers() -> Containers {
