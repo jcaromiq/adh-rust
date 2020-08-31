@@ -65,21 +65,3 @@ async fn get_containers(filter: ContainerListOptions) -> Containers {
     container::to_domain(containers)
 }
 
-
-#[tokio::test]
-async fn should_get_all_containers() {
-    let v = get_all_containers().await;
-    dbg!(v);
-}
-
-#[tokio::test]
-async fn should_get_stopped_containers() {
-    let v = get_exited_containers().await;
-    dbg!(v);
-}
-
-#[tokio::test]
-async fn should_get_running_containers() {
-    let v = get_running_containers().await;
-    dbg!(v);
-}
