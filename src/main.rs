@@ -61,8 +61,11 @@ async fn main() {
             .display_order(8)
             .about("Remove all images"))
         .subcommand(SubCommand::with_name("rec")
-                        .display_order(9)
-                        .about("Remove exited containers"))
+            .display_order(9)
+            .about("Remove exited containers"))
+        .subcommand(SubCommand::with_name("kc")
+            .display_order(9)
+            .about("Kill all containers"))
         .get_matches();
 
     from(matches).execute().await;

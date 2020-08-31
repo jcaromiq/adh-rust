@@ -13,6 +13,7 @@ use crate::commands::start::Start;
 use crate::commands::stop::Stop;
 use crate::commands::ri::RemoveImages;
 use crate::commands::remove_exited_containers::RemoveExitedContainers;
+use crate::commands::kc::KillContainers;
 
 #[async_trait]
 pub trait Command {
@@ -53,6 +54,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("clr") => Box::new(LocalRegistry),
         Some("ri") => Box::new(RemoveImages),
         Some("rec") => Box::new(RemoveExitedContainers),
+        Some("kc") => Box::new(KillContainers),
         _ => Box::new(Noop),
     }
 }

@@ -38,6 +38,7 @@ $ adh --help
     clr                         Create a local registry
     ri                          Remove all named volumes
     rec                         Remove exited containers
+    kc                          Kill all containers
 
   Options:
 

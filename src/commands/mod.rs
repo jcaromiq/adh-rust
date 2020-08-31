@@ -11,3 +11,4 @@ pub mod remove_none_images;
 pub mod start;
 pub mod stop;
 pub mod ri;
+pub mod kc;

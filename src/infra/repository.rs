@@ -1,4 +1,5 @@
-use shiplift::{ContainerListOptions, Docker, ContainerFilter, RmContainerOptions};
+use shiplift::{ContainerFilter, ContainerListOptions, Docker, RmContainerOptions};
+
 use crate::domain::container;
 use crate::domain::container::Containers;
 
@@ -35,6 +36,18 @@ pub async fn get_running_containers() -> Containers {
     let mut status = Vec::new();
     status.push(ContainerFilter::Status(String::from("running")));
     get_containers(ContainerListOptions::builder().filter(status).build()).await
+}
+
+pub async fn stop_running_containers() {
+    let containers = get_running_containers().await;
+    let docker = Docker::new();
+    for c in containers.list {
+        print!("Killing container with id {}... ",c.id);
+        match docker.containers().get(c.id.as_str()).kill(None).await {
+            Ok(_) => println!("killed"),
+            Err(e) => eprintln!("Error: {} deleting killing container {}", e, c.id),
+        }
+    }
 }
 
 async fn get_containers(filter: ContainerListOptions) -> Containers {
