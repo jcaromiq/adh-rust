@@ -1,31 +1,23 @@
 use async_trait::async_trait;
-use shiplift::rep::Container;
-use shiplift::{ContainerListOptions, Docker, RmContainerOptions, ContainerFilter};
+use shiplift::{ Docker, RmContainerOptions};
 
 use crate::commands::command::Command;
+use crate::infra::repository::get_exited_containers;
+use crate::domain::container::Containers;
 
 pub struct RemoveExitedContainers;
 
 #[async_trait]
 impl Command for RemoveExitedContainers {
     async fn execute(&self) {
-        let mut vec = Vec::new();
-        vec.push(ContainerFilter::Status(String::from("exited")));
-        let docker = Docker::new();
-        match docker
-            .containers()
-            .list(&ContainerListOptions::builder().filter(vec).build())
-            .await
-        {
-            Ok(container) => delete(container).await,
-            Err(e) => eprintln!("Error: {}", e),
-        }
+        let containers = get_exited_containers().await;
+        delete(containers).await;
     }
 }
 
-async fn delete(containers: Vec<Container>) {
+async fn delete(containers: Containers) {
     let docker = Docker::new();
-    for container in containers {
+    for container in containers.list {
         match docker
             .containers()
             .get(container.id.as_str())
