@@ -12,3 +12,4 @@ pub mod remove_none_images;
 pub mod ri;
 pub mod start;
 pub mod stop;
+pub mod remove_volumes;

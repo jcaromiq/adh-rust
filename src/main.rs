@@ -64,8 +64,11 @@ async fn main() {
             .display_order(9)
             .about("Remove exited containers"))
         .subcommand(SubCommand::with_name("kc")
-            .display_order(9)
+            .display_order(10)
             .about("Kill all containers"))
+        .subcommand(SubCommand::with_name("remove-volumes")
+            .display_order(10)
+            .about("remove all volumes"))
         .get_matches();
 
     from(matches).execute().await;
