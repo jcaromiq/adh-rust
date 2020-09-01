@@ -39,6 +39,7 @@ $ adh --help
     ri                          Remove all named volumes
     rec                         Remove exited containers
     kc                          Kill all containers
+    remove-volumes              Remove all volumes
 
   Options:
 
