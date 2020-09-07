@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 
 use crate::commands::command::Command;
-use crate::infra::repository::stop_running_containers;
+use crate::infra::container_repository::stop_running_containers;
 
 pub struct KillContainers;
 

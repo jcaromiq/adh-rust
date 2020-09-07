@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 
 use crate::commands::command::Command;
-use crate::infra::repository::{delete, get_exited_containers};
+use crate::infra::container_repository::{delete, get_exited_containers};
 
 pub struct RemoveExitedContainers;
 
