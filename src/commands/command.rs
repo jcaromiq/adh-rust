@@ -46,7 +46,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("remove-none-images") => Box::new(RemoveNoneImages),
         Some("rc") => Box::new(RemoveContainers),
         Some("start") => {
-            let container_id = get_arg(&matches, "start", "container_id");
+            let container_id = get_optional_arg(&matches, "start", "container_id");
             Box::new(Start { container_id })
         }
         Some("stop") => {

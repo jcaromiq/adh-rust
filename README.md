@@ -29,7 +29,7 @@ $ adh --help
         --database_name         Optional. Allows you to specify the name of a database to be created on image startup
         --root_password         Optional. Specifies the password that will be set for the MySQL root superuser account
                                 If not set, a random password will be created and printed at the end
-    start <container_id>        Start container with given id
+    start <container_id>        Start container with given id, if container_id is not provider, user can select from a list
     stop <container_id>         Stop container with given id
     ps                          Formatted ps for running dockers
     psa                         Formatted ps for all dockers

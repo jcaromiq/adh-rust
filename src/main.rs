@@ -33,7 +33,7 @@ async fn main() {
             .about("Start containers")
             .arg(Arg::with_name("container_id")
                 .help("container id to start")
-                .required(true)))
+                .required(false)))
         .subcommand(SubCommand::with_name("stop")
             .about("Stop containers")
             .arg(Arg::with_name("container_id")
