@@ -30,7 +30,7 @@ $ adh --help
         --root_password         Optional. Specifies the password that will be set for the MySQL root superuser account
                                 If not set, a random password will be created and printed at the end
     start <container_id>        Start container with given id, if container_id is not provider, user can select from a list
-    stop <container_id>         Stop container with given id
+    stop <container_id>         Stop container with given id, if container_id is not provider, user can select from a list
     ps                          Formatted ps for running dockers
     psa                         Formatted ps for all dockers
     rc                          Remove all containers
