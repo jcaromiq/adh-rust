@@ -50,7 +50,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
             Box::new(Start { container_id })
         }
         Some("stop") => {
-            let container_id = get_arg(&matches, "stop", "container_id");
+            let container_id = get_optional_arg(&matches, "stop", "container_id");
             Box::new(Stop { container_id })
         }
         Some("clr") => Box::new(LocalRegistry),

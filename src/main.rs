@@ -38,7 +38,7 @@ async fn main() {
             .about("Stop containers")
             .arg(Arg::with_name("container_id")
                 .help("container id to stop")
-                .required(true)))
+                .required(false)))
         .subcommand(SubCommand::with_name("ps")
             .about("Formatted ps for running dockers"))
         .subcommand(SubCommand::with_name("psa")
