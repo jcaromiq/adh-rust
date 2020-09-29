@@ -10,11 +10,12 @@ use crate::commands::rc::RemoveContainers;
 use crate::commands::remove_none_images::RemoveNoneImages;
 
 use crate::commands::kc::KillContainers;
+use crate::commands::logs::Logs;
 use crate::commands::remove_exited_containers::RemoveExitedContainers;
+use crate::commands::remove_volumes::RemoveVolumes;
 use crate::commands::ri::RemoveImages;
 use crate::commands::start::Start;
 use crate::commands::stop::Stop;
-use crate::commands::remove_volumes::RemoveVolumes;
 
 #[async_trait]
 pub trait Command {
@@ -57,6 +58,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("rec") => Box::new(RemoveExitedContainers),
         Some("kc") => Box::new(KillContainers),
         Some("remove-volumes") => Box::new(RemoveVolumes),
+        Some("log") => Box::new(Logs),
         _ => Box::new(Noop),
     }
 }

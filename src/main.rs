@@ -8,6 +8,7 @@ use crate::commands::command::from;
 mod commands;
 mod domain;
 mod infra;
+mod utils;
 
 #[tokio::main]
 async fn main() {
@@ -56,6 +57,8 @@ async fn main() {
             .about("Kill all containers"))
         .subcommand(SubCommand::with_name("remove-volumes")
             .about("Remove all volumes"))
+        .subcommand(SubCommand::with_name("log")
+            .about("Show docker logs"))
         .get_matches();
 
     from(matches).execute().await;
