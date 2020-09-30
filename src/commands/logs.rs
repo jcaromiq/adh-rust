@@ -1,6 +1,5 @@
 use async_trait::async_trait;
 use futures::StreamExt;
-use shiplift::builder::LogsOptionsBuilder;
 use shiplift::tty::TtyChunk;
 use shiplift::{Docker, LogsOptions};
 
