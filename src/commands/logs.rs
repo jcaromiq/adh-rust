@@ -1,13 +1,15 @@
 use async_trait::async_trait;
 use futures::StreamExt;
-use shiplift::tty::TtyChunk;
 use shiplift::{Docker, LogsOptions};
+use shiplift::tty::TtyChunk;
 
 use crate::commands::command::Command;
 use crate::infra::container_repository::get_all_containers;
 use crate::infra::container_selector::select_container;
 
-pub struct Logs;
+pub struct Logs {
+    pub(crate) follow: bool,
+}
 
 #[async_trait]
 impl Command for Logs {
@@ -17,7 +19,7 @@ impl Command for Logs {
         let docker = Docker::new();
         let mut logs_stream = docker.containers().get(&selected).logs(
             &LogsOptions::builder()
-                .follow(true)
+                .follow(self.follow)
                 .stdout(true)
                 .stderr(true)
                 .build(),

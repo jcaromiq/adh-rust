@@ -59,6 +59,8 @@ async fn main() {
             .about("Remove all volumes"))
         .subcommand(SubCommand::with_name("log")
             .about("Show docker logs"))
+        .subcommand(SubCommand::with_name("flog")
+            .about("Show docker logs and listen the changes"))
         .get_matches();
 
     from(matches).execute().await;

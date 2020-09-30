@@ -2,16 +2,15 @@ use async_trait::async_trait;
 use clap::ArgMatches;
 
 use crate::commands::create_local_registry::LocalRegistry;
+use crate::commands::kc::KillContainers;
+use crate::commands::logs::Logs;
 use crate::commands::mysql::Mysql;
 use crate::commands::nginx::Nginx;
 use crate::commands::ps::Ps;
 use crate::commands::psa::Psa;
 use crate::commands::rc::RemoveContainers;
-use crate::commands::remove_none_images::RemoveNoneImages;
-
-use crate::commands::kc::KillContainers;
-use crate::commands::logs::Logs;
 use crate::commands::remove_exited_containers::RemoveExitedContainers;
+use crate::commands::remove_none_images::RemoveNoneImages;
 use crate::commands::remove_volumes::RemoveVolumes;
 use crate::commands::ri::RemoveImages;
 use crate::commands::start::Start;
@@ -58,7 +57,8 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
         Some("rec") => Box::new(RemoveExitedContainers),
         Some("kc") => Box::new(KillContainers),
         Some("remove-volumes") => Box::new(RemoveVolumes),
-        Some("log") => Box::new(Logs),
+        Some("flog") => Box::new(Logs { follow: true }),
+        Some("log") => Box::new(Logs { follow: false }),
         _ => Box::new(Noop),
     }
 }

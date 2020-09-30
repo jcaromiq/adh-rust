@@ -29,8 +29,8 @@ $ adh --help
         --database_name         Optional. Allows you to specify the name of a database to be created on image startup
         --root_password         Optional. Specifies the password that will be set for the MySQL root superuser account
                                 If not set, a random password will be created and printed at the end
-    start <container_id>        Start container with given id, if container_id is not provider, user can select from a list
-    stop <container_id>         Stop container with given id, if container_id is not provider, user can select from a list
+    start <container_id>        Start container with id container_id, if container_id is not provider, user can select from a list
+    stop <container_id>         Stop container with id container_id, if container_id is not provider, user can select from a list
     ps                          Formatted ps for running dockers
     psa                         Formatted ps for all dockers
     rc                          Remove all containers
@@ -40,6 +40,8 @@ $ adh --help
     rec                         Remove exited containers
     kc                          Kill all containers
     remove-volumes              Remove all volumes
+    log <container_id>          Show container logs with id container_id, if container_id is not provider, user can select from a list
+    flog <container_id>         Show container logs in follow mode with id container_id, if container_id is not provider, user can select from a list
 
   Options:
 
