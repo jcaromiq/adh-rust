@@ -5,8 +5,8 @@ use termion::event::Key;
 use termion::raw::IntoRawMode;
 use termion::screen::AlternateScreen;
 use tui::backend::TermionBackend;
-use tui::widgets::{List, ListItem};
 use tui::Terminal;
+use tui::widgets::{List, ListItem};
 
 use crate::domain::container::Containers;
 use crate::utils::events::{Event, Events};
@@ -27,13 +27,12 @@ pub fn select_container(containers: Containers) -> String {
             let items: Vec<ListItem> = container_list
                 .items
                 .iter()
-                .map(|i| {
-                    let t = format!("[{}] {}", i.id, i.name);
-                    ListItem::new(t)
-                })
+                .map(|it|
+                    ListItem::new(format!("[{}] {}", it.id, it.name))
+                )
                 .collect();
 
-            let list = List::new(items).highlight_symbol(">");
+            let list = List::new(items).highlight_symbol("->");
 
             f.render_stateful_widget(list, f.size(), &mut container_list.state);
         });
@@ -42,6 +41,12 @@ pub fn select_container(containers: Containers) -> String {
             Event::Input(input) => match input {
                 Key::Char('q') => {
                     break;
+                }
+                Key::Left => {
+                    container_list.first();
+                }
+                Key::Right => {
+                    container_list.last();
                 }
                 Key::Down => {
                     container_list.next();
