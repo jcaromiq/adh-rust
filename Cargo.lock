@@ -2,7 +2,7 @@
 # It is not intended for manual editing.
 [[package]]
 name = "adh"
-version = "1.0.0"
+version = "1.1.1"
 dependencies = [
  "assert_cmd 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "async-trait 0.1.40 (registry+https://github.com/rust-lang/crates.io-index)",
