@@ -12,9 +12,9 @@ pub struct Stop {
 #[async_trait]
 impl Command for Stop {
     async fn execute(&self) {
-        let id =  match &self.container_id {
-            None =>  select_container(get_running_containers().await),
-            Some(id) => id.to_string()
+        let id = match &self.container_id {
+            None => select_container(get_running_containers().await),
+            Some(id) => id.to_string(),
         };
         let docker = Docker::new();
         match docker.containers().get(&id).stop(None).await {

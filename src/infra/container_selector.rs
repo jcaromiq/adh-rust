@@ -5,13 +5,13 @@ use termion::event::Key;
 use termion::raw::IntoRawMode;
 use termion::screen::AlternateScreen;
 use tui::backend::TermionBackend;
+use tui::widgets::{Block, Borders, List, ListItem};
 use tui::Terminal;
-use tui::widgets::{List, ListItem, Borders, Block};
 
 use crate::domain::container::Containers;
 use crate::utils::events::{Event, Events};
 use crate::utils::StatefulList;
-use tui::style::{Style, Color, Modifier};
+use tui::style::{Color, Modifier, Style};
 
 pub fn select_container(containers: Containers) -> String {
     let stdout = io::stdout().into_raw_mode().unwrap();
@@ -28,15 +28,13 @@ pub fn select_container(containers: Containers) -> String {
             let items: Vec<ListItem> = container_list
                 .items
                 .iter()
-                .map(|it|
-                    ListItem::new(format!("[{}] {}", it.id, it.name))
-                )
+                .map(|it| ListItem::new(format!("[{}] {}", it.id, it.name)))
                 .collect();
 
             let list = List::new(items)
-                .block(Block::default()
-                    .borders(Borders::ALL)
-                    .title("Select container with arrow keys and Enter to confirm (press 'q' to exit)"))
+                .block(Block::default().borders(Borders::ALL).title(
+                    "Select container with arrow keys and Enter to confirm (press 'q' to exit)",
+                ))
                 .highlight_style(
                     Style::default()
                         .bg(Color::Gray)

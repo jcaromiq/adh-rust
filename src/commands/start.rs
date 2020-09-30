@@ -2,8 +2,8 @@ use async_trait::async_trait;
 use shiplift::Docker;
 
 use crate::commands::command::Command;
-use crate::infra::container_selector::select_container;
 use crate::infra::container_repository::get_exited_containers;
+use crate::infra::container_selector::select_container;
 
 pub struct Start {
     pub container_id: Option<String>,
@@ -12,9 +12,9 @@ pub struct Start {
 #[async_trait]
 impl Command for Start {
     async fn execute(&self) {
-       let id =  match &self.container_id {
-            None =>  select_container(get_exited_containers().await),
-            Some(id) => id.to_string()
+        let id = match &self.container_id {
+            None => select_container(get_exited_containers().await),
+            Some(id) => id.to_string(),
         };
 
         let docker = Docker::new();

@@ -26,7 +26,7 @@ impl<T> StatefulList<T> {
     }
 
     pub fn last(&mut self) {
-        self.state.select(Some(self.items.len()-1));
+        self.state.select(Some(self.items.len() - 1));
     }
     pub fn next(&mut self) {
         let i = match self.state.selected() {
