@@ -17,7 +17,9 @@ impl Command for Start {
             Some(id) => Some(id.to_string()),
         };
         match id {
-            None => { println!("No containers found"); }
+            None => {
+                println!("No containers found");
+            }
             Some(container_id) => {
                 let docker = Docker::new();
                 match docker.containers().get(container_id.as_str()).start().await {

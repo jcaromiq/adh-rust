@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 use futures::StreamExt;
-use shiplift::{Docker, LogsOptions};
 use shiplift::tty::TtyChunk;
+use shiplift::{Docker, LogsOptions};
 
 use crate::commands::command::Command;
 use crate::infra::container_repository::get_all_containers;
@@ -20,7 +20,9 @@ impl Command for Logs {
             return;
         }
         match select_container(containers) {
-            None => { println!("No containers found"); }
+            None => {
+                println!("No containers found");
+            }
             Some(selected) => {
                 let docker = Docker::new();
                 let mut logs_stream = docker.containers().get(&selected).logs(

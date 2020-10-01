@@ -17,10 +17,17 @@ impl Command for Stop {
             Some(id) => Some(id.to_string()),
         };
         match id {
-            None => { println!("No containers found"); }
+            None => {
+                println!("No containers found");
+            }
             Some(container_id) => {
                 let docker = Docker::new();
-                match docker.containers().get(container_id.as_str()).stop(None).await {
+                match docker
+                    .containers()
+                    .get(container_id.as_str())
+                    .stop(None)
+                    .await
+                {
                     Ok(_) => println!("Container stopped!"),
                     Err(e) => eprintln!("Error: {}", e),
                 }

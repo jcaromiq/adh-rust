@@ -5,8 +5,8 @@ use termion::raw::IntoRawMode;
 use termion::screen::AlternateScreen;
 use tui::backend::TermionBackend;
 use tui::style::{Color, Modifier, Style};
-use tui::Terminal;
 use tui::widgets::{Block, Borders, List, ListItem};
+use tui::Terminal;
 
 use crate::domain::container::Containers;
 use crate::utils::events::{Event, Events};
