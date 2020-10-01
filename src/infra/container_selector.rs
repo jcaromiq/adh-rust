@@ -5,8 +5,8 @@ use termion::raw::IntoRawMode;
 use termion::screen::AlternateScreen;
 use tui::backend::TermionBackend;
 use tui::style::{Color, Modifier, Style};
-use tui::widgets::{Block, Borders, List, ListItem};
 use tui::Terminal;
+use tui::widgets::{Block, Borders, List, ListItem};
 
 use crate::domain::container::Containers;
 use crate::utils::events::{Event, Events};
@@ -24,7 +24,7 @@ pub fn select_container(containers: Containers) -> Option<String> {
     let mut container_list = StatefulList::with_items(containers.list);
 
     let key_events = Events::new();
-    let mut selected = "";
+    let mut selected: Option<String> = None;
     loop {
         terminal.draw(|f| {
             let items: Vec<ListItem> = container_list
@@ -65,15 +65,20 @@ pub fn select_container(containers: Containers) -> Option<String> {
                     container_list.previous();
                 }
                 Key::Char('\n') => {
-                    let index = container_list.state.selected().unwrap();
-                    let c = container_list.items.get(index).unwrap();
-                    selected = &c.id;
-                    break;
+                    match container_list.state.selected() {
+                        None => {  }
+                        Some(index) => {
+                            let a = &container_list.items.get(index).unwrap().id;
+                            selected = Some(a.to_string());
+                            break;
+                        }
+                    }
+
                 }
                 _ => {}
             },
             _ => {}
         }
     }
-    Some(String::from(selected))
+   selected
 }
