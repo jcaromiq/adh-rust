@@ -14,12 +14,17 @@ impl Command for Stop {
     async fn execute(&self) {
         let id = match &self.container_id {
             None => select_container(get_running_containers().await),
-            Some(id) => id.to_string(),
+            Some(id) => Some(id.to_string()),
         };
-        let docker = Docker::new();
-        match docker.containers().get(&id).stop(None).await {
-            Ok(_) => println!("Container stopped!"),
-            Err(e) => eprintln!("Error: {}", e),
+        match id {
+            None => { println!("No containers found"); }
+            Some(container_id) => {
+                let docker = Docker::new();
+                match docker.containers().get(container_id.as_str()).stop(None).await {
+                    Ok(_) => println!("Container stopped!"),
+                    Err(e) => eprintln!("Error: {}", e),
+                }
+            }
         }
     }
 }

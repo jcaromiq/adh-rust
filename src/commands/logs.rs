@@ -15,20 +15,28 @@ pub struct Logs {
 impl Command for Logs {
     async fn execute(&self) {
         let containers = get_all_containers().await;
-        let selected = select_container(containers);
-        let docker = Docker::new();
-        let mut logs_stream = docker.containers().get(&selected).logs(
-            &LogsOptions::builder()
-                .follow(self.follow)
-                .stdout(true)
-                .stderr(true)
-                .build(),
-        );
+        if containers.is_empty() {
+            println!("No containers found");
+            return;
+        }
+        match select_container(containers) {
+            None => { println!("No containers found"); }
+            Some(selected) => {
+                let docker = Docker::new();
+                let mut logs_stream = docker.containers().get(&selected).logs(
+                    &LogsOptions::builder()
+                        .follow(self.follow)
+                        .stdout(true)
+                        .stderr(true)
+                        .build(),
+                );
 
-        while let Some(log_result) = logs_stream.next().await {
-            match log_result {
-                Ok(chunk) => print_chunk(chunk),
-                Err(e) => eprintln!("Error: {}", e),
+                while let Some(log_result) = logs_stream.next().await {
+                    match log_result {
+                        Ok(chunk) => print_chunk(chunk),
+                        Err(e) => eprintln!("Error: {}", e),
+                    }
+                }
             }
         }
     }

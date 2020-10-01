@@ -1,7 +1,11 @@
 pub struct Containers {
     pub list: Vec<Container>,
 }
-
+impl Containers{
+    pub fn is_empty(&self) -> bool {
+        self.list.is_empty()
+    }
+}
 pub struct Container {
     pub id: String,
     pub name: String,

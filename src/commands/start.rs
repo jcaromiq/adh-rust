@@ -14,13 +14,17 @@ impl Command for Start {
     async fn execute(&self) {
         let id = match &self.container_id {
             None => select_container(get_exited_containers().await),
-            Some(id) => id.to_string(),
+            Some(id) => Some(id.to_string()),
         };
-
-        let docker = Docker::new();
-        match docker.containers().get(id.as_str()).start().await {
-            Ok(_) => println!("Container started!"),
-            Err(e) => eprintln!("Error: {}", e),
+        match id {
+            None => { println!("No containers found"); }
+            Some(container_id) => {
+                let docker = Docker::new();
+                match docker.containers().get(container_id.as_str()).start().await {
+                    Ok(_) => println!("Container started!"),
+                    Err(e) => eprintln!("Error: {}", e),
+                }
+            }
         }
     }
 }

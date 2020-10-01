@@ -12,7 +12,10 @@ use crate::domain::container::Containers;
 use crate::utils::events::{Event, Events};
 use crate::utils::StatefulList;
 
-pub fn select_container(containers: Containers) -> String {
+pub fn select_container(containers: Containers) -> Option<String> {
+    if containers.is_empty() {
+        return None;
+    }
     let stdout = io::stdout().into_raw_mode().unwrap();
     let stdout = AlternateScreen::from(stdout);
     let backend = TermionBackend::new(stdout);
@@ -72,5 +75,5 @@ pub fn select_container(containers: Containers) -> String {
             _ => {}
         }
     }
-    String::from(selected)
+    Some(String::from(selected))
 }
