@@ -44,7 +44,7 @@ async fn start_existing_container(name: &str) {
 
 async fn start(id: &str) {
     let docker = Docker::new();
-    match docker.containers().get(&id).start().await {
+    match docker.containers().get(id).start().await {
         Ok(()) => println!("docker {:?} created", id),
         Err(e) => eprintln!("Error: {}", e),
     }
