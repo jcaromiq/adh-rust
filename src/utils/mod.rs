@@ -8,13 +8,6 @@ pub struct StatefulList<T> {
 }
 
 impl<T> StatefulList<T> {
-    pub fn new() -> StatefulList<T> {
-        StatefulList {
-            state: ListState::default(),
-            items: Vec::new(),
-        }
-    }
-
     pub fn with_items(items: Vec<T>) -> StatefulList<T> {
         StatefulList {
             state: ListState::default(),

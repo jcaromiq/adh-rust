@@ -71,11 +71,3 @@ fn get_optional_arg(matches: &ArgMatches, command: &str, argument: &str) -> Opti
         .map(|s| s.to_string())
 }
 
-fn get_arg(matches: &ArgMatches, command: &str, argument: &str) -> String {
-    matches
-        .subcommand_matches(command)
-        .unwrap()
-        .value_of(argument)
-        .unwrap()
-        .to_string()
-}

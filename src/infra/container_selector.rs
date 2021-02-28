@@ -47,8 +47,8 @@ pub fn select_container(containers: Containers) -> Option<String> {
             f.render_stateful_widget(list, f.size(), &mut container_list.state);
         });
 
-        match key_events.next().unwrap() {
-            Event::Input(input) => match input {
+        if let Event::Input(input) = key_events.next().unwrap() {
+            match input {
                 Key::Char('q') => {
                     break;
                 }
@@ -66,19 +66,17 @@ pub fn select_container(containers: Containers) -> Option<String> {
                 }
                 Key::Char('\n') => {
                     match container_list.state.selected() {
-                        None => {  }
+                        None => {}
                         Some(index) => {
                             let a = &container_list.items.get(index).unwrap().id;
                             selected = Some(a.to_string());
                             break;
                         }
                     }
-
                 }
                 _ => {}
-            },
-            _ => {}
+            }
         }
     }
-   selected
+    selected
 }
