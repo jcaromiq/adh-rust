@@ -70,4 +70,3 @@ fn get_optional_arg(matches: &ArgMatches, command: &str, argument: &str) -> Opti
         .value_of(argument)
         .map(|s| s.to_string())
 }
-

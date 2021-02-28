@@ -5,8 +5,8 @@ use termion::raw::IntoRawMode;
 use termion::screen::AlternateScreen;
 use tui::backend::TermionBackend;
 use tui::style::{Color, Modifier, Style};
-use tui::Terminal;
 use tui::widgets::{Block, Borders, List, ListItem};
+use tui::Terminal;
 
 use crate::domain::container::Containers;
 use crate::utils::events::{Event, Events};
@@ -64,16 +64,14 @@ pub fn select_container(containers: Containers) -> Option<String> {
                 Key::Up => {
                     container_list.previous();
                 }
-                Key::Char('\n') => {
-                    match container_list.state.selected() {
-                        None => {}
-                        Some(index) => {
-                            let a = &container_list.items.get(index).unwrap().id;
-                            selected = Some(a.to_string());
-                            break;
-                        }
+                Key::Char('\n') => match container_list.state.selected() {
+                    None => {}
+                    Some(index) => {
+                        let a = &container_list.items.get(index).unwrap().id;
+                        selected = Some(a.to_string());
+                        break;
                     }
-                }
+                },
                 _ => {}
             }
         }
