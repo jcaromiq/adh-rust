@@ -13,9 +13,9 @@ mod utils;
 #[tokio::main]
 async fn main() {
     let matches = App::new("ADH")
-        .version("1.1.3")
+        .version("1.1.4")
         .author("Joaco <me@joaquin-caro.es>")
-        .about("docker helper")
+        .about("Docker helper")
         .subcommand(SubCommand::with_name("nginx")
             .about("Run nginx with a volume in the current directory"))
         .subcommand(SubCommand::with_name("mysql")
