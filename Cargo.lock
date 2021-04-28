@@ -888,6 +888,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "paste"
+version = "1.0.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "acbf547ad0c65e31259204bd90935776d1c693cec2f4ff7abb7a1bbbd40dfe58"
+
+[[package]]
 name = "percent-encoding"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1226,7 +1232,7 @@ dependencies = [
 [[package]]
 name = "shiplift"
 version = "0.7.0"
-source = "git+https://github.com/softprops/shiplift#95beb6f2aaf36d38ca1dc3abb7544fb878c45ca0"
+source = "git+https://github.com/softprops/shiplift#8c614740a8c017135a70a7f16a21054df1bbbb59"
 dependencies = [
  "base64",
  "byteorder",
@@ -1241,6 +1247,7 @@ dependencies = [
  "log",
  "mime",
  "openssl",
+ "paste",
  "pin-project 1.0.5",
  "serde",
  "serde_json",
