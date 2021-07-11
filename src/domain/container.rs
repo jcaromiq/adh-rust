@@ -26,8 +26,8 @@ pub fn to_domain(containers: Vec<shiplift::rep::Container>) -> Containers {
         if image.contains("sha256:") {
             image = container.image[7..19].to_string();
         }
-        let mut public_ports = "".to_string();
-        let mut private_ports = "".to_string();
+        let mut public_ports = String::new();
+        let mut private_ports = String::new();
         if !container.ports.is_empty() {
             for port in container.ports {
                 if port.public_port.is_some() {
