@@ -18,8 +18,8 @@ termion = "1.5.6"
 
 [dev-dependencies]
 mockiato = "0.9.5"
+pretty_assertions = "1.0.0"
 predicates = "2.0.3"
-pretty_assertions = "0.7.2"
 assert_cmd = "2.0.2"
 
 [profile.release]
