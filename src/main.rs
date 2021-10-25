@@ -13,7 +13,7 @@ mod utils;
 #[tokio::main]
 async fn main() {
     let matches = App::new("ADH")
-        .version("1.1.5")
+        .version("1.1.6")
         .author("Joaco <me@joaquin-caro.es>")
         .about("Docker helper")
         .subcommand(SubCommand::with_name("nginx")
