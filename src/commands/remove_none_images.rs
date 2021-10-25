@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use shiplift::rep::Image;
 use shiplift::{Docker, ImageFilter, ImageListOptions};
 
-use crate::commands::command::Command;
+use crate::commands::Command;
 
 pub struct RemoveNoneImages;
 

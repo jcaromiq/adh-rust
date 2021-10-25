@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use shiplift::rep::Volume;
 use shiplift::Docker;
 
-use crate::commands::command::Command;
+use crate::commands::Command;
 
 pub struct RemoveVolumes;
 

@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 use shiplift::Docker;
 
-use crate::commands::command::Command;
+use crate::commands::Command;
 use crate::infra::container_repository::get_running_containers;
 use crate::infra::container_selector::select_container;
 

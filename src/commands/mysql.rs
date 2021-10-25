@@ -4,7 +4,7 @@ use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
 use shiplift::ContainerOptions;
 
-use crate::commands::command::Command;
+use crate::commands::Command;
 use crate::commands::create_and_run::create_and_run;
 
 pub struct Mysql {

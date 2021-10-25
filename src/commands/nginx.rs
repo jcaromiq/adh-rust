@@ -1,6 +1,6 @@
 use shiplift::ContainerOptions;
 
-use crate::commands::command::Command;
+use crate::commands::Command;
 use crate::commands::create_and_run::create_and_run;
 use async_trait::async_trait;
 use std::env;

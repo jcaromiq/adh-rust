@@ -2,8 +2,8 @@
 extern crate prettytable;
 
 use clap::{App, Arg, SubCommand};
+use crate::commands::from;
 
-use crate::commands::command::from;
 
 mod commands;
 mod domain;
