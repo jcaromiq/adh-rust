@@ -1,5 +1,8 @@
 # ADH: Docker 'Useful Commands' Helper
-
+<p align="center">
+  <a href="https://github.com/jcaromiq/adh-rust/actions/"><img src="https://github.com/jcaromiq/adh-rust/actions/workflows/ci.yml/badge.svg" alt="Build Status"></a>
+  <a href="https://deps.rs/repo/github/jcaromiq/adh-rust"><img src="https://deps.rs/repo/github/jcaromiq/adh-rust/status.svg" alt="Dependency status"></a>
+</p>
 
 ##  Description
 
