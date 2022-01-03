@@ -10,11 +10,9 @@ pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
 }
 
 pub async fn create_and_run_from_repo(options: &ContainerOptions,
-                                      repo: &str,
-                                      image_name: &str,
-                                      tag: &str) {
+                                      repo: &str) {
     let pull_options = &PullOptions::builder()
-        .src(repo).build();
+        .image(repo).build();
     create_and_start(options, pull_options).await;
 }
 
@@ -23,18 +21,24 @@ async fn create_and_start(options: &ContainerOptions, pull_options: &PullOptions
     let mut stream = docker
         .images()
         .pull(pull_options);
-    while stream.next().await.is_some() {}
+   while let Some(pull_result) = stream.next().await {
+        match pull_result {
+            Ok(output) => println!("{:?}", output),
+            Err(e) => eprintln!("Error: {}", e),
+        }
+    }
     let result = docker.containers().create(options).await;
     match result {
         Ok(result) => {
             start(&result.id).await
         }
         Err(e) => match e {
-            Fault { code, message: _ } => {
+            Fault { code, message} => {
                 if code == 409 {
                     start_existing_container(options.name.as_ref().unwrap()).await
                 } else {
-                    eprintln!("Error {}", code);
+                    eprintln!("Error with code {} and message {}", code, message);
+
                 }
             }
             _ => eprintln!("Error"),
@@ -51,11 +55,11 @@ async fn start_existing_container(name: &str) {
         .await
     {
         Ok(containers) => {
-            let nginx = containers
+            let container = containers
                 .iter()
                 .find(|c| c.names.contains(&format!("/{}", name)));
 
-            start(&nginx.unwrap().id).await;
+            start(&container.unwrap().id).await;
         }
         Err(e) => eprintln!("Error: {}", e),
     }
