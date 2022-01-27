@@ -71,7 +71,7 @@ pub fn from(matches: ArgMatches) -> Box<dyn Command> {
             let container_id = get_optional_arg(&matches, "stop", "container_id");
             Box::new(Stop { container_id })
         }
-        Some("clr") => Box::new(LocalRegistry),
+        Some("registry") => Box::new(LocalRegistry),
         Some("ri") => Box::new(RemoveImages),
         Some("rec") => Box::new(RemoveExitedContainers),
         Some("kc") => Box::new(KillContainers),

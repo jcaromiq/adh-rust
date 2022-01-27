@@ -12,10 +12,15 @@ mod utils;
 
 #[tokio::main]
 async fn main() {
-    let matches = App::new("ADH")
-        .version("1.1.6")
+    let matches = App::new("adh")
+        .version("1.2.0")
         .author("Joaco <me@joaquin-caro.es>")
-        .about("Docker helper")
+        .about("
+        ___    ____  __  __
+       /   |  / __ \\/ / / /
+      / /| | / / / / /_/ /
+     / ___ |/ /_/ / __  /
+    /_/  |_/_____/_/ /_/")
         .subcommand(SubCommand::with_name("nginx")
             .about("Run nginx with a volume in the current directory"))
         .subcommand(SubCommand::with_name("mysql")
@@ -47,7 +52,7 @@ async fn main() {
             .about("Remove all containers"))
         .subcommand(SubCommand::with_name("remove-none-images")
             .about("Remove none images"))
-        .subcommand(SubCommand::with_name("clr")
+        .subcommand(SubCommand::with_name("registry")
             .about("Create a local registry"))
         .subcommand(SubCommand::with_name("ri")
             .about("Remove all images"))
@@ -58,10 +63,12 @@ async fn main() {
         .subcommand(SubCommand::with_name("remove-volumes")
             .about("Remove all volumes"))
         .subcommand(SubCommand::with_name("log")
+            .display_order(1)
             .about("Show docker logs"))
         .subcommand(SubCommand::with_name("flog")
+            .display_order(2)
             .about("Show docker logs and listen the changes"))
-     .subcommand(SubCommand::with_name("elastic")
+        .subcommand(SubCommand::with_name("elastic")
             .about("Elastic search"))
         .get_matches();
 

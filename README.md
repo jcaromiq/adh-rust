@@ -38,7 +38,7 @@ $ adh --help
     psa                         Formatted ps for all dockers
     rc                          Remove all containers
     remove-none-images          Remove none images
-    clr                         Create a local registry
+    registry                    Create a local registry
     ri                          Remove all named volumes
     rec                         Remove exited containers
     kc                          Kill all containers
