@@ -13,7 +13,7 @@ mod utils;
 #[tokio::main]
 async fn main() {
     let matches = App::new("adh")
-        .version("1.2.0")
+        .version("1.2.1")
         .author("Joaco <me@joaquin-caro.es>")
         .about("
         ___    ____  __  __
