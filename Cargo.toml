@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 shiplift = { git = "https://github.com/softprops/shiplift" }
-tokio = { version = "1.15.0", features = ["macros"] }
+tokio = { version = "1.16.1", features = ["macros"] }
 async-trait = "0.1.52"
 prettytable-rs = "0.8.0"
 clap = "2.34.0"
