@@ -20,7 +20,7 @@ termion = "1.5.6"
 mockiato = "0.9.5"
 pretty_assertions = "1.0.0"
 predicates = "2.1.0"
-assert_cmd = "2.0.2"
+assert_cmd = "2.0.4"
 
 [profile.release]
 opt-level = 'z'
