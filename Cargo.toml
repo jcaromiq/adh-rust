@@ -11,7 +11,7 @@ async-trait = "0.1.52"
 prettytable-rs = "0.8.0"
 clap = "2.34.0"
 futures = "0.3.19"
-rand="0.8.4"
+rand="0.8.5"
 openssl = { version = "0.10.38", features = ["vendored"] }
 tui = "0.17.0"
 termion = "1.5.6"
