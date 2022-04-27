@@ -3,7 +3,7 @@ use std::io;
 use termion::event::Key;
 use termion::raw::IntoRawMode;
 use termion::screen::AlternateScreen;
-use tui::backend::TermionBackend;
+use tui::backend::CrosstermBackend;
 use tui::style::{Color, Modifier, Style};
 use tui::widgets::{Block, Borders, List, ListItem};
 use tui::Terminal;
@@ -18,7 +18,7 @@ pub fn select_container(containers: Containers) -> Option<String> {
     }
     let stdout = io::stdout().into_raw_mode().unwrap();
     let stdout = AlternateScreen::from(stdout);
-    let backend = TermionBackend::new(stdout);
+    let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend).unwrap();
 
     let mut container_list = StatefulList::with_items(containers.list);
