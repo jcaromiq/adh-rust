@@ -16,7 +16,7 @@ pub struct Container {
     pub ports: String,
 }
 
-pub fn to_domain(containers: Vec<shiplift::rep::Container>) -> Containers {
+pub fn to_domain(containers: Vec<shiplift::container::ContainerInfo>) -> Containers {
     let mut list: Vec<Container> = Vec::new();
     for container in containers {
         let id = container.id[0..12].to_string();

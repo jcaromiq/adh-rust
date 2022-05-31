@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use shiplift::rep::Volume;
+use shiplift::volume::VolumeInfo;
 use shiplift::Docker;
 
 use crate::commands::Command;
@@ -17,7 +17,7 @@ impl Command for RemoveVolumes {
     }
 }
 
-async fn delete(volumes: Vec<Volume>) {
+async fn delete(volumes: Vec<VolumeInfo>) {
     let docker = Docker::new();
     for v in volumes {
         match docker.volumes().get(&v.name).delete().await {

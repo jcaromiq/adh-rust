@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use shiplift::rep::Image;
+use shiplift::image::ImageInfo;
 use shiplift::{Docker, ImageListOptions};
 
 use crate::commands::Command;
@@ -26,7 +26,7 @@ impl Command for RemoveImages {
     }
 }
 
-async fn remove_image(image: &Image) {
+async fn remove_image(image: &ImageInfo) {
     let docker = Docker::new();
     match docker.images().get(&image.id).delete().await {
         Ok(_) => println!("{:?} deleted! ", get_name_or_id(image)),
@@ -40,7 +40,7 @@ async fn remove_image(image: &Image) {
         },
     }
 }
-fn get_name_or_id(image: &Image) -> &String {
+fn get_name_or_id(image: &ImageInfo) -> &String {
     match &image.repo_tags {
         None => &image.id,
         Some(n) => n.first().expect("_"),

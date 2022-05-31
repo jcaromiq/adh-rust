@@ -1,7 +1,7 @@
 use shiplift::ContainerOptions;
 
-use crate::commands::Command;
 use crate::commands::create_and_run::create_and_run;
+use crate::commands::Command;
 
 pub struct LocalRegistry;
 use async_trait::async_trait;

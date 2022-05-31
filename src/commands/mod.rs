@@ -1,5 +1,6 @@
 pub mod create_and_run;
 pub mod create_local_registry;
+pub mod elastic;
 pub mod kc;
 pub mod logs;
 pub mod mysql;
@@ -13,12 +14,12 @@ pub mod remove_volumes;
 pub mod ri;
 pub mod start;
 pub mod stop;
-pub mod elastic;
 
 use async_trait::async_trait;
 use clap::ArgMatches;
 
 use crate::commands::create_local_registry::LocalRegistry;
+use crate::commands::elastic::Elastic;
 use crate::commands::kc::KillContainers;
 use crate::commands::logs::Logs;
 use crate::commands::mysql::Mysql;
@@ -32,7 +33,6 @@ use crate::commands::remove_volumes::RemoveVolumes;
 use crate::commands::ri::RemoveImages;
 use crate::commands::start::Start;
 use crate::commands::stop::Stop;
-use crate::commands::elastic::Elastic;
 
 #[async_trait]
 pub trait Command {

@@ -4,8 +4,8 @@ use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
 use shiplift::ContainerOptions;
 
-use crate::commands::Command;
 use crate::commands::create_and_run::create_and_run;
+use crate::commands::Command;
 
 pub struct Mysql {
     pub root_password: Option<String>,

@@ -48,8 +48,4 @@ impl<T> StatefulList<T> {
         };
         self.state.select(Some(i));
     }
-
-    pub fn unselect(&mut self) {
-        self.state.select(None);
-    }
 }

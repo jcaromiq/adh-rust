@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use shiplift::rep::Image;
+use shiplift::image::ImageInfo;
 use shiplift::{Docker, ImageFilter, ImageListOptions};
 
 use crate::commands::Command;
@@ -22,7 +22,7 @@ impl Command for RemoveNoneImages {
     }
 }
 
-async fn delete(images: Vec<Image>) {
+async fn delete(images: Vec<ImageInfo>) {
     let docker = Docker::new();
     for image in images {
         match docker.images().get(image.id.as_str()).delete().await {
