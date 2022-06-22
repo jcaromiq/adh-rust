@@ -39,6 +39,7 @@ $ adh --help
     rc                          Remove all containers
     remove-none-images          Remove none images
     registry                    Create a local registry
+    elastic                     Run an ElasticSearch
     ri                          Remove all named volumes
     rec                         Remove exited containers
     kc                          Kill all containers

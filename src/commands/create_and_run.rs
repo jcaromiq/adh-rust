@@ -2,13 +2,13 @@ use futures::StreamExt;
 use shiplift::errors::Error::Fault;
 use shiplift::{ContainerListOptions, ContainerOptions, Docker, PullOptions};
 
-pub async fn create_and_run(options: &ContainerOptions, image_name: &str) {
+pub async fn create_and_run_latest(options: &ContainerOptions, image_name: &str) {
     let pull_options = &PullOptions::builder().image(image_name).build();
     create_and_start(options, pull_options).await;
 }
 
-pub async fn create_and_run_from_repo(options: &ContainerOptions, repo: &str) {
-    let pull_options = &PullOptions::builder().image(repo).build();
+pub async fn create_and_run_with_tag(options: &ContainerOptions, image_name: &str, tag: &str) {
+    let pull_options = &PullOptions::builder().image(image_name).tag(tag).build();
     create_and_start(options, pull_options).await;
 }
 

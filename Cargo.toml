@@ -2,7 +2,7 @@
 name = "adh"
 version = "1.2.1"
 authors = ["Joaquin Caro <me@joaquin-caro.es>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 shiplift = { git = "https://github.com/softprops/shiplift" }

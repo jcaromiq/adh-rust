@@ -4,7 +4,7 @@ use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
 use shiplift::ContainerOptions;
 
-use crate::commands::create_and_run::create_and_run;
+use crate::commands::create_and_run::create_and_run_latest;
 use crate::commands::Command;
 
 pub struct Mysql {
@@ -39,7 +39,7 @@ impl Command for Mysql {
             .expose(3306, "tcp", 3306)
             .build();
 
-        create_and_run(options, "mysql:latest").await;
+        create_and_run_latest(options, "mysql").await;
         println!("mysql root password: {}", password);
     }
 }

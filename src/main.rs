@@ -68,7 +68,7 @@ async fn main() {
             .display_order(2)
             .about("Show docker logs and listen the changes"))
         .subcommand(SubCommand::with_name("elastic")
-            .about("Elastic search"))
+            .about("Run an ElasticSearch"))
         .get_matches();
 
     from(matches).execute().await;
